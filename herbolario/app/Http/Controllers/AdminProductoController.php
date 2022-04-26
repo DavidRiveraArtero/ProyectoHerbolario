@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\FotoProducto;
 use Illuminate\Http\Request;
 
-class ProductoController extends Controller
+class AdminProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return view("home.index",[
-            "productos" => Producto::all()
+        return view('admin.productos.index',[
+            "productos"=>Producto::paginate(2)
         ]);
     }
 
@@ -26,7 +27,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.productos.create");
     }
 
     /**
@@ -37,7 +38,16 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre'=>'required',
+            'descripcion'=>'required',
+            'precio'=>'required',
+            'cantidad'=>'required',
+        ]);
+        if(!$request){
+            dd('dento');
+            return redirect('productos.create')->with('failed','ERROR FALTAN CAMPOS');
+        }
     }
 
     /**
@@ -46,11 +56,10 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(Producto $producto,$id)
+    public function show(Producto $producto)
     {
 
-        $producto = Producto::where('id',$id)->first();
-        return view("home.show",[
+        return view("admin.productos.show",[
             "producto" => $producto
         ]);
     }
@@ -86,6 +95,8 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        //
+
+        $producto->delete();
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado');
     }
 }

@@ -20,7 +20,7 @@
             <hr>
             <h3>¿Eres nuevo?</h3>
             <div class="d-grid gap-2 col-3 mx-auto" style="margin-top: 20px">
-                <button class="btn btn-primary">Crear Cuenta</button>
+                <button class="btn btn-success">Crear Cuenta</button>
             </div>
         </div>
     </div>

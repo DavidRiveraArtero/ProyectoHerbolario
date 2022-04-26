@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\AdminProductoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,13 @@ use App\Http\Controllers\ProductoController;
 //    return view('home/home');
 //});
 
+// PRODUCTOS HOME
 Route::resource('home',ProductoController::class);
+
+// ADMIN
+Route::resource('admin/productos', AdminProductoController::class);
+
+
 
 Route::get('/login',function (){
     return view('auth/login');
