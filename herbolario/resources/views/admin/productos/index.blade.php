@@ -73,7 +73,7 @@
                 </tbody>
             </table>
             {{-- Pagination --}}
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center mylinks">
                 {!! $productos->links() !!}
             </div>
         </div>

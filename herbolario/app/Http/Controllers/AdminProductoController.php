@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
-use App\Models\FotoProducto;
+use App\Models\FotosProducto;
+
 use Illuminate\Http\Request;
 
 class AdminProductoController extends Controller
@@ -16,7 +17,7 @@ class AdminProductoController extends Controller
     public function index()
     {
         return view('admin.productos.index',[
-            "productos"=>Producto::paginate(2)
+            "productos"=>Producto::paginate(10)
         ]);
     }
 
@@ -38,19 +39,41 @@ class AdminProductoController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'nombre'=>'required',
             'descripcion'=>'required',
             'precio'=>'required',
             'cantidad'=>'required',
+            'file_path'=>'required'
         ]);
-        $ok = Producto::create($request->all());
-        dd($ok);
+
+        $ok = Producto::create([
+            'nombre' => $request->nombre,
+            'precio' => $request->precio,
+            'cantidad'=> $request->cantidad,
+            'descripcion' => $request->descripcion,
+
+        ]);
+
+
         if($ok){
+
+            $long = $request->file_path;
+
+
+            for($x = 0; $x<count($long); $x++){
+                FotosProducto::create([
+                    'id_product'=>$ok->id,
+                    'file_path'=>$long[$x],
+                ]);
+            }
+
             return redirect()->route('productos.index')->with('success', 'Producto Creado');
         }else{
             return redirect()->route('productos.index')->with('success', 'Producto Creado');
         }
+
     }
 
     /**

@@ -13,10 +13,11 @@ class FotosProductos extends Migration
      */
     public function up()
     {
-        Schema::create('FotosProducto', function (Blueprint $table){
+        Schema::create('fotos_productos', function (Blueprint $table){
             $table->id();
             $table->foreignId('id_product')->references('id')->on('productos');
             $table->string('file_path');
+            $table->timestamps();
         });
     }
 
