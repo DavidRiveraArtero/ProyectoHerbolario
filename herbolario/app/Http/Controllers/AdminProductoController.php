@@ -44,9 +44,12 @@ class AdminProductoController extends Controller
             'precio'=>'required',
             'cantidad'=>'required',
         ]);
-        if(!$request){
-            dd('dento');
-            return redirect('productos.create')->with('failed','ERROR FALTAN CAMPOS');
+        $ok = Producto::create($request->all());
+        dd($ok);
+        if($ok){
+            return redirect()->route('productos.index')->with('success', 'Producto Creado');
+        }else{
+            return redirect()->route('productos.index')->with('success', 'Producto Creado');
         }
     }
 

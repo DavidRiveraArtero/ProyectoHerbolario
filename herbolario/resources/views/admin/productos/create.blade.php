@@ -6,11 +6,6 @@
             <h3 style="font-weight: bold;">Añadir Producto</h3>
         </div>
     </header>
-    @if(session()->has('failed'))
-        <div class="alert alert-success" style="width: 100%; height: auto">
-            {{ session()->get('failed') }}
-        </div>
-    @endif
     <div class="icono_lista dropdown">
         <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-filter-left btm dropdown-toggle" style="float: left" id="dropdownList" data-bs-toggle="dropdown" aria-expanded="false" viewBox="0 0 16 16">
             <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>

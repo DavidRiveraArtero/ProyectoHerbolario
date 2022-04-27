@@ -1,7 +1,7 @@
 header{
     width: 100%;
     background-color: #9BD682;
-    height: 80px;
+    height: auto;
     float: left;
 }
 
@@ -216,4 +216,115 @@ table.tareas{
 }
 .margtop0{
     margin-top: 0rem!important;
+}
+
+/*RESPONSIVE*/
+
+@media (max-width: 1200px) {
+
+    .marg-top100px{
+        margin-top: 100px;
+    }
+    #contenedor_usuario{
+        display: none;
+    }
+    #contenedor_carrito{
+        display: none;
+    }
+    #menu_opciones{
+        display: flex!important;
+    }
+
+    .productos{
+        width: 50%;
+    }
+
+}
+@media (max-width: 1428px){
+    .contenedor_productos{
+        margin-top: 25px;
+    }
+    .productos{
+        width: 45%;
+        margin: 0% auto;
+        margin-bottom: 40px;
+        margin-left: 3%;
+        height: auto;
+    }
+}
+
+@media (max-width: 800px) {
+    .productos{
+        width: 47%;
+        margin: 0% auto;
+        margin-bottom: 40px;
+        margin-left: 3%;
+        height: auto;
+    }
+    #nav-container{
+        display: none;
+    }
+    #prenav{
+        display: block!important;
+    }
+    #responsive-nav{
+
+        margin-bottom: 20px;
+        height: 350px;
+        width: 100%;
+        padding-top: 20px;
+    }
+
+    #wrapper ul{
+
+        width: 100%;
+        margin: 0% auto;
+        height: 100%;
+        padding-left: 0%;
+    }
+
+    #wrapper li{
+        margin: 0% auto;
+        left: 0;
+        width: 100%;
+        height: 17%;
+        transition: all ease-in-out .2s;
+    }
+
+
+
+}
+
+@media (max-width: 558px) {
+    .productos{
+        width: 100%;
+        margin: 0% auto;
+        margin-bottom: 40px;
+        height: auto;
+    }
+    #responsive-nav{
+
+        margin-bottom: 20px;
+        height: 350px;
+        width: 100%;
+        padding-top: 20px;
+    }
+
+    #wrapper ul{
+
+        width: 100%;
+        margin: 0% auto;
+        height: 100%;
+        padding-left: 0%;
+    }
+
+    #wrapper li{
+        margin: 0% auto;
+        left: 0;
+        width: 100%;
+        height: 17%;
+        transition: all ease-in-out .2s;
+    }
+
+
 }
