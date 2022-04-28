@@ -9,7 +9,11 @@
     </header>
 
 
-
+    @if(session()->has('success'))
+        <div class="alert alert-success" style="width: 100%; height: auto; position:static!important;">
+            {{ session()->get('success') }}
+        </div>
+    @endif
     <div class="contenedor_tablas">
 
         <div class="icono_lista dropdown">
@@ -24,11 +28,8 @@
             </div>
         </div>
 
-        @if(session()->has('success'))
-            <div class="alert alert-success" style="width: 100%; height: auto">
-                {{ session()->get('success') }}
-            </div>
-        @endif
+
+
 
         <a href="{{route('productos.create')}}" class="btn btn-primary" style="float: right;margin-right: 50px">Crear Producto</a>
 

@@ -121,7 +121,7 @@ class AdminProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-
+        $foto_id = FotosProducto::where('id_product',$producto->id)->delete();
         $producto->delete();
         return redirect()->route('productos.index')->with('success', 'Producto eliminado');
     }

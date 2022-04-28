@@ -17,17 +17,21 @@
             <a class="btn btn-primary">Crear Usuarios</a>
         </div>
     </div>
-    <div id="contenedor_create">
-        <form method="POST" action="{{route('productos.store')}}" >
+
+    <div id="contenedor_create" class="container">
+
+        <form method="POST" action="{{route('productos.store')}}" class="row" >
+
             @csrf
             @method('post')
-            <did class="contenedor_create_inputs">
+
+            <did class="contenedor_create_inputs col-xl-1">
                 <h3>Nombre Producto</h3>
                 <input class="contenedor_inputs_line" type="text" placeholder="Nombre Producto" name="nombre">
             </did>
 
-            <div class="contenedor_create_inputs">
-                <h3>Precio Producto</h3>
+            <div class="contenedor_create_inputs ">
+                <h3 >Precio Producto</h3>
                 <input class="contenedor_inputs_line" type="text" placeholder="Precio" name="precio">
             </div>
 
@@ -39,7 +43,7 @@
                 <h3>Cantidad</h3>
                 <input class="contenedor_inputs_line" type="text" placeholder="Cantidad" name="cantidad">
             </did>
-            <div id="drop-area " class="input-file" >
+            <div id="drop-area" class="input-file">
 
                 <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
 
@@ -48,15 +52,16 @@
                 <progress id="progress-bar" max=100 value=0></progress>
 
             </div>
-            <button class="btn btn-primary" type="submit" id="send" style="float: right">Crear Producto</button>
+            <button class="btn btn-primary col-lg-12" type="submit" id="send" style="float: right; margin-top:40px">Crear Producto</button>
         </form>
+
     </div>
 </body>
 
 <script>
     var cont = 0;
     var listaImg = [];
-    var divInput = document.getElementById('drop-area')
+    //var divInput = document.getElementById('drop-area')
 
     // ************************ Drag and drop ***************** //
     let dropArea = document.getElementById("drop-area")
@@ -148,7 +153,7 @@
         }
         cont ++
         var inputFile = document.createElement('input')
-        divInput.appendChild(inputFile).setAttribute('id',cont)
+        dropArea.appendChild(inputFile).setAttribute('id',cont)
         var algo = document.getElementById(cont)
         algo.setAttribute('type','text')
         algo.setAttribute('name','file_path[]')

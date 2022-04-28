@@ -227,10 +227,15 @@ table.tareas{
 #drop-area {
     border: 2px dashed #ccc;
     border-radius: 20px;
-    width: 480px;
+    width: auto;
     font-family: sans-serif;
     margin: 100px auto;
     padding: 20px;
+    float: left;
+    margin-left: 320px;
+    margin-top: 0;
+    margin-bottom: 0;
+
 }
 #drop-area.highlight {
     border-color: purple;
@@ -269,6 +274,7 @@ table.tareas{
 }
 #contenedor_create form .contenedor_create_inputs{
     width: 50%;
+    height: auto;
     float: left;
     margin-bottom: 200px;
     text-align: center;
