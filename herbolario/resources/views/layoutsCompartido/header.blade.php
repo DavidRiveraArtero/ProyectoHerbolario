@@ -10,34 +10,44 @@
                 <span class="input-group-text btn btn-secondary">Search</span>
             </div>
 
-            <!-- Modificar más adelante -->
-            @if("HOLA" == "HOLA")
+            <!-- No logeado -->
+            @guest
+                <div class="col-xl-1 col-lg-2 col-sm-2  dropdown" id="contenedor_usuario" style="padding-right: 100px">
+                    <a href="{{route("login")}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg><span class="bi bi-person-circle" id="nombre_user">Login</span></a>
+                </div>
+
+            <!-- REGISTRADO -->
+            @else
                 <div class="col-xl-2 col-lg-2 col-sm-2  dropdown" id="contenedor_usuario">
                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                    </svg><span class="bi bi-person-circle" id="nombre_user">Usuario</span>
+                    </svg><span class="bi bi-person-circle" id="nombre_user"> {{ Auth::user()->name }}</span>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <h3 style="text-align: center;">Menu user</h3>
                         <hr>
+                        <!-- MI CUENTA -->
                         <a class="dropdown-item" href="#">Mi cuenta</a>
+                        <!-- LOGOUT -->
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
-                </div>
-
-
-            @else
-                 <!-- PANTALLA NORMAL  1200px -->
-                <div class="col-xl-1 col-lg-2 col-sm-2  dropdown" id="contenedor_usuario" style="padding-right: 100px">
-                    <a href="{{route("login")}}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                    </svg><span class="bi bi-person-circle" id="nombre_user">Login</span></a>
                 </div>
 
             @endif
 
-
+            <!-- Carrito -->
             <div class="col-xl-1 col-lg-1 col-sm-1 " id="contenedor_carrito">
                 <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -45,6 +55,7 @@
                     </svg><span class="bi bi-cart">2</span>
                 </a>
             </div>
+
         </div>
     </div>
 </header>

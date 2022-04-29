@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
-use App\Models\FotosProducto;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class ProductoController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return view("home.index",[
-            "productos" => Producto::all(),
-            "FotosProducto" => FotosProducto::all()
-        ]);
+        //
     }
 
     /**
@@ -39,35 +36,38 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email',
+            'password'=>'required|min:8|confirmed'
+        ]);
+
+        return User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=> Hash::make($request->password),
+            'role_id'=>1
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Producto $producto,$id)
+    public function show(User $user)
     {
-
-        $fotoProducto = FotosProducto::all()->where('id_product','=',$id);
-
-        $producto = Producto::where('id',$id)->first();
-
-        return view("home.show",[
-            "producto" => $producto,
-            "fotoProducto" => $fotoProducto
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit(User $user)
     {
         //
     }
@@ -76,10 +76,10 @@ class ProductoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -87,10 +87,10 @@ class ProductoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto)
+    public function destroy(User $user)
     {
         //
     }

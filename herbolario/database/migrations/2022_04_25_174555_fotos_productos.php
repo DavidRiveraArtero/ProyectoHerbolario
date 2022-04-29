@@ -28,6 +28,6 @@ class FotosProductos extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('fotos_productos');
     }
 }

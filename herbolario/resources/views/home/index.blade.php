@@ -60,59 +60,6 @@
                 </div>
             </div>
         @endforeach
-        <div class="productos">
-            <div class="imagen_producto ">
-                <img src="https://www.herbolariodeconfianza.es/img/cms/Herbolario%20y%20salud%20natural.jpg" class="w-100">
-            </div>
-            <div class="info_producto">
-                <p>Nombre Producto</p>
-                <p>Precio</p>
-                <p>Descripcion</p>
-            </div>
-            <div class="d-grid gap-2 col-6 mx-auto btn_producto_info">
-                <a href="#" class="btn btn-success">Info</a>
-            </div>
-        </div>
-        <div class="productos">
-            <div class="imagen_producto">
-                <img src="https://www.herbolariodeconfianza.es/img/cms/Herbolario%20y%20salud%20natural.jpg">
-            </div>
-            <div class="info_producto">
-                <p>Nombre Producto</p>
-                <p>Precio</p>
-                <p>Descripcion</p>
-            </div>
-            <div class="d-grid gap-2 col-6 mx-auto btn_producto_info">
-                <a href="#" class="btn btn-success">Info</a>
-            </div>
-        </div>
-
-        <div class="productos">
-            <div class="imagen_producto">
-                <img src="https://www.herbolariodeconfianza.es/img/cms/Herbolario%20y%20salud%20natural.jpg">
-            </div>
-            <div class="info_producto">
-                <p>Nombre Producto</p>
-                <p>Precio</p>
-                <p>Descripcion</p>
-            </div>
-            <div class="d-grid gap-2 col-6 mx-auto btn_producto_info">
-                <a href="#" class="btn btn-success">Info</a>
-            </div>
-        </div>
-
-        <div class="productos">
-            <div class="imagen_producto">
-                <img src="https://www.herbolariodeconfianza.es/img/cms/Herbolario%20y%20salud%20natural.jpg">
-            </div>
-            <div class="info_producto">
-                <p>Nombre Producto</p>
-                <p>Precio</p>
-                <p>Descripcion</p>
-            </div>
-            <div class="d-grid gap-2 col-6 mx-auto btn_producto_info">
-                <a href="#" class="btn btn-success">Info</a>
-            </div>
-        </div>
     </div>
+
 @endsection

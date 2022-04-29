@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\FotosProducto;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
@@ -53,23 +54,38 @@ class AdminProductoController extends Controller
             'precio' => $request->precio,
             'cantidad'=> $request->cantidad,
             'descripcion' => $request->descripcion,
-
         ]);
 
 
         if($ok){
-
             $long = $request->file_path;
 
 
-            for($x = 0; $x<count($long); $x++){
-                FotosProducto::create([
-                    'id_product'=>$ok->id,
-                    'file_path'=>$long[$x],
-                ]);
-            }
+            for($x = 0; $x < count($long); $x++){
+                $upload = $request->file('file_path');
+                $ruta = 'uploads/' . $request->nombre;
+                $fileName = $request->file('file_path')[$x]->getClientOriginalName();
+                $fileUpload = time() . "_" . $fileName;
+                $filePath = $upload[$x]->storeAs(
+                    $ruta,
+                    $fileUpload,
+                    'public'
+                );
 
+                if(\Storage::disk('public')->exists($filePath)) {
+
+                    $fullPath = \Storage::disk('public')->path($filePath);
+
+                    FotosProducto::create([
+                        'id_product' => $ok->id,
+                        'file_path' => $filePath,
+                    ]);
+
+                }
+            }
             return redirect()->route('productos.index')->with('success', 'Producto Creado');
+
+
         }else{
             return redirect()->route('productos.index')->with('success', 'Producto Creado');
         }
@@ -98,7 +114,9 @@ class AdminProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        //
+        return view("admin.productos.edit",[
+            "producto" => $producto
+        ]);
     }
 
     /**
@@ -110,7 +128,12 @@ class AdminProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        $request->validate([
+            'nombre'=>'required',
+            'descripcion'=>'required',
+            'precio'=>'required',
+            'cantidad'=>'required',
+        ]);
     }
 
     /**
@@ -121,8 +144,14 @@ class AdminProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $storageDisk = FotosProducto::where('id_product',$producto->id)->get();
+
+        Storage::disk('public')->delete($storageDisk[0]->file_path);
+
         $foto_id = FotosProducto::where('id_product',$producto->id)->delete();
+
         $producto->delete();
+
         return redirect()->route('productos.index')->with('success', 'Producto eliminado');
     }
 }
