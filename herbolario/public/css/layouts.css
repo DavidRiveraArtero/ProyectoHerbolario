@@ -27,6 +27,8 @@ header{
 
 #nombre_user{
     padding-left: 10px;
+    margin-top: 20px;
+    float: left;
 }
 #contenedor_carrito{
     padding-top: 10px;
@@ -40,6 +42,16 @@ header{
 .dropdown:hover .dropdown-menu {
 
     display: block;
+    margin-top: 0;
+}
+
+.dropdown-item1:hover .sub-menu{
+    display: block!important;
+    margin-top: 0;
+}
+
+.dropdown-item2:hover .sub-menu2{
+    display: block!important;
     margin-top: 0;
 }
 
@@ -169,6 +181,10 @@ ul{
 .marg-top15px{
     margin-top: 15px;
 }
+
+.marg-top30px{
+    margin-top: 30px;
+}
 .aling-content-center{
     width: 70%;
     margin: 0% auto;
@@ -198,19 +214,66 @@ table.tareas{
 .contenedor_tablas{
     width: 100%;
 }
+
+/* DROPDOWN MENU ADMIN */
 .icono_lista{
-    margin-top: 20%;
-    padding-left: 10px;
     width: 5%;
     float: left;
-    /*margin: 0% auto;*/
+    left: 0;
 }
-.contenedor_dropdown{
-    text-align: center;
-    float: left;
 
-    width: 250px
+.contenedor_dropdown{
+    width: 290px;
+    height: 87vh;
+    top:0;
+    left: 0;
+    overflow-y: auto;
 }
+
+.contenedor_dropdown .menu{
+    width: 100%;
+    margin-top: 80px;
+
+}
+
+.contenedor_dropdown .menu .item{
+    position: relative;
+    cursor: pointer;
+
+}
+.contenedor_dropdown .menu .item a{
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    padding: 5px 30px;
+    line-height: 60px;
+}
+
+.contenedor_dropdown .menu .item a:hover{
+    background-color: #8621F8;
+    transition: 0.3s ease;
+}
+
+.contenedor_dropdown .menu .item a .dropdown{
+    position: absolute;
+    right: 0;
+    margin: 20px;
+    transition: 0.3s ease;
+}
+.contenedor_dropdown .menu .item .sub-menu{
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.contenedor_dropdown .menu .item .sub-menu a{
+    padding-left: 80px;
+}
+
+
+
+
+
+
 .marg-bot15px{
     margin-bottom: 15px;
 }
@@ -300,6 +363,15 @@ table.tareas{
 .input-file{
     margin-left: 430px;
 }
+
+.contenedor_opciones_user{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+
+}
+
 
 
 /*RESPONSIVE*/

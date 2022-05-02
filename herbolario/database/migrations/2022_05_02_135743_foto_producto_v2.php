@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Producto extends Migration
+class FotoProductoV2 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class Producto extends Migration
      */
     public function up()
     {
-        Schema::create('productos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->integer('precio');
-            $table->string('descripcion');
-            $table->integer('cantidad');
-            $table->timestamps();
+        Schema::table('fotos_productos', function (Blueprint $table) {
+            $table->boolean('activo');
         });
     }
 
@@ -30,6 +25,6 @@ class Producto extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('productos');
+        //
     }
 }

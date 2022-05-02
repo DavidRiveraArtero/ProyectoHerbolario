@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\FotosProducto;
+use App\Models\Avatar_usuarios;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductoController extends Controller
 {
@@ -15,10 +17,20 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return view("home.index",[
-            "productos" => Producto::all(),
-            "FotosProducto" => FotosProducto::all()
-        ]);
+        if(Auth::user()){
+            $fotoUser = Avatar_usuarios::all()->where('id_usuario','=',Auth::user()->id);
+            return view("home.index",[
+                "productos" => Producto::all(),
+                "FotosProducto" => FotosProducto::all(),
+                "FotoUsuario" => $fotoUser
+            ]);
+        }else{
+            return view("home.index",[
+                "productos" => Producto::all(),
+                "FotosProducto" => FotosProducto::all(),
+            ]);
+        }
+
     }
 
     /**
@@ -55,10 +67,26 @@ class ProductoController extends Controller
 
         $producto = Producto::where('id',$id)->first();
 
-        return view("home.show",[
-            "producto" => $producto,
-            "fotoProducto" => $fotoProducto
-        ]);
+
+        if(Auth::user()) {
+            $fotoUser = Avatar_usuarios::all()->where('id_usuario','=',Auth::user()->id);
+
+            return view("home.show", [
+                "producto" => $producto,
+                "fotoProducto" => $fotoProducto,
+                "FotoUsuario" => $fotoUser
+
+
+            ]);
+        }else{
+            return view("home.show", [
+                "producto" => $producto,
+                "fotoProducto" => $fotoProducto,
+               
+
+
+            ]);
+        }
     }
 
     /**

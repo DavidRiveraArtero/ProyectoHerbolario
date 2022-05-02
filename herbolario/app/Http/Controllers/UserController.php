@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Avatar_usuarios;
 
 class UserController extends Controller
 {
@@ -56,9 +58,22 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($auth)
     {
-        //
+        $user = User::where('id','=',$auth)->first();
+        $fotoUser = Avatar_usuarios::all()->where('id_usuario','=',Auth::user()->id);
+
+        // CONTROLAR QUE SOLO EL USUARIO LOGEADO PUEDA ENTRAR EN SU PERFIL
+        if($auth == Auth::user()->id){
+            return view("user.perfil",[
+                'datosUsuario'=>$user,
+                "FotoUsuario" => $fotoUser
+
+            ]);
+        }else{
+            dd("ERROR ESTE NO ES TU USUARIO");
+        }
+
     }
 
     /**

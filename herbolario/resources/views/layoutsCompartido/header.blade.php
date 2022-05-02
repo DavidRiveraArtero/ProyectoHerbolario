@@ -1,18 +1,18 @@
 <header class="fixed-top">
     <div class=""> <!--SE PUEDE PROVAR CON CONTAINER-->
         <div class="row">
-            <div class="col-xl-3 col-lg-5 col-sm-5" id="contenedor-titulo" style="padding-left: 140px; text-aling:center;">
+            <div class="col-xl-3 col-lg-5 col-4" id="contenedor-titulo" style="padding-left: 140px; text-aling:center;">
                 <h2>Nombre de la tienda</h2>
             </div>
 
-            <div class="input-group col-xl-5 col-lg-7 col-sm-7 " id="contenedor-input">
+            <div class="input-group col-xl-5 col-lg-4 col-2 " id="contenedor-input">
                 <input type="text" placeholder="Buscador" id="buscador">
                 <span class="input-group-text btn btn-secondary">Search</span>
             </div>
 
             <!-- No logeado -->
             @guest
-                <div class="col-xl-1 col-lg-2 col-sm-2  dropdown" id="contenedor_usuario" style="padding-right: 100px">
+                <div class="col-xl-2 col-lg-2 col-sm-2  dropdown" id="contenedor_usuario" style="padding-right: 100px">
                     <a href="{{route("login")}}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -22,16 +22,20 @@
 
             <!-- REGISTRADO -->
             @else
-                <div class="col-xl-2 col-lg-2 col-sm-2  dropdown" id="contenedor_usuario">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                    </svg><span class="bi bi-person-circle" id="nombre_user"> {{ Auth::user()->name }}</span>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="col-xl-2 col-lg-1 col-sm-2  dropdown" id="contenedor_usuario">
+                    @foreach($FotoUsuario as $avatar)
+                        @if($avatar->activo == "1")
+                            <div class="" style="height: 80px; float: left">
+                                <img src="{{asset("storage/". $avatar->file_path)}}" style="border-radius: 50%; height: 100%">
+                            </div>
+                        @endif
+                    @endforeach
+                    <span class="bi bi-person-circle" id="nombre_user" s> {{ Auth::user()->name }}</span>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-top: 80px">
                         <h3 style="text-align: center;">Menu user</h3>
                         <hr>
                         <!-- MI CUENTA -->
-                        <a class="dropdown-item" href="#">Mi cuenta</a>
+                        <a class="dropdown-item" href="{{route("perfil.show",Auth::user())}}">Mi cuenta</a>
                         <!-- LOGOUT -->
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();

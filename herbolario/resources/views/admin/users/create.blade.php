@@ -2,55 +2,60 @@
 <body>
 <header style="margin-bottom: 40px" >
     <div class="txt-centrado marg-top15px">
-        <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Editar productos</span>
-        <h3 style="font-weight: bold;">Editar Producto</h3>
+        <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Añadir usuario</span>
+        <h3 style="font-weight: bold;">Añadir Usuario</h3>
     </div>
 </header>
 @include('layoutsCompartido.adminNavegacion')
 
 <div id="contenedor_create" class="container">
-
-    <form method="POST" action="{{route('productos.update',$producto)}}" class="row" >
+    @if(session()->has('error'))
+        <div class="alert alert-success" style="width: 100%; height: auto; position:static!important;">
+            {{ session()->get('error') }}
+        </div>
+    @endif
+    <form method="POST" action="{{route('usuarios.store')}}" class="row" enctype="multipart/form-data">
 
         @csrf
+        {{csrf_field()}}
         @method('post')
 
         <did class="contenedor_create_inputs col-xl-1">
-            <h3>Nombre Producto</h3>
-            <input class="contenedor_inputs_line" type="text" placeholder="Nombre Producto" name="nombre" value="{{$producto->nombre}}">
+            <h3>Nombre Usuario</h3>
+            <input class="contenedor_inputs_line" type="text" placeholder="Nombre Usuario" name="nombre" value="{{ old('nombre') }}">
         </did>
 
         <div class="contenedor_create_inputs ">
-            <h3 >Precio Producto</h3>
-            <input class="contenedor_inputs_line" type="text" placeholder="Precio" name="precio" value="{{$producto->precio}}">
+            <h3>Email</h3>
+            <input class="contenedor_inputs_line" type="email" placeholder="Correo" name="email">
         </div>
 
         <div class="contenedor_create_inputs">
-            <h3>Descripcion</h3>
-            <input class="contenedor_inputs_line" type="text" placeholder="Descripcion" name="descripcion" value="{{$producto->descripcion}}">
+            <h3>Password</h3>
+            <input class="contenedor_inputs_line" type="password" placeholder="Contraseña" name="password">
         </div>
         <did class="contenedor_create_inputs">
-            <h3>Cantidad</h3>
-            <input class="contenedor_inputs_line" type="text" placeholder="Cantidad" name="cantidad" value="{{$producto->cantidad}}">
+            <h3>Role</h3>
+            <select class="contenedor_inputs_line" name="rol">
+                <option value="">-----------</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
         </did>
         <div id="drop-area" class="input-file">
 
             <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
-
-            <label class="button" for="fileElem" onclick="handleFiles(this.files)">Select some files</label>
+            <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)" name="file_path[]">
             <div id="gallery" /></div>
         <progress id="progress-bar" max=100 value=0></progress>
-
 </div>
-<button class="btn btn-primary col-lg-12" type="submit" id="send" style="float: right; margin-top:40px">Editar Producto</button>
+<button class="btn btn-primary col-lg-12" type="submit" id="send" style="float: right; margin-top:40px">Crear Producto</button>
 </form>
-
 </div>
 </body>
 
 <script>
     var cont = 0;
-    var listaImg = [];
     //var divInput = document.getElementById('drop-area')
 
     // ************************ Drag and drop ***************** //
@@ -90,68 +95,41 @@
     function handleDrop(e) {
         var dt = e.dataTransfer
         var files = dt.files
+        files = [...files]
 
-        handleFiles(files)
-
-    }
-
-    let uploadProgress = []
-    let progressBar = document.getElementById('progress-bar')
-
-    function initializeProgress(numFiles) {
-        progressBar.value = 0
-        uploadProgress = []
-
-        for(let i = numFiles; i > 0; i--) {
-            uploadProgress.push(0)
-
-        }
-
-    }
-
-    function updateProgress(fileNumber, percent) {
-        uploadProgress[fileNumber] = percent
-        let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
-        progressBar.value = total
+        files.forEach(uploadFile)
     }
 
     function handleFiles(files) {
+        console.log("handleFiles")
         files = [...files]
-        initializeProgress(files.length)
         files.forEach(uploadFile)
         files.forEach(previewFile)
-
     }
 
     function previewFile(file) {
+        // Preview
         let reader = new FileReader()
+
         reader.readAsDataURL(file)
         reader.onloadend = function() {
             let img = document.createElement('img')
             img.src = reader.result
+            console.log('files', file)
             document.getElementById('gallery').appendChild(img)
         }
     }
 
-    function uploadFile(file, i) {
-
-        listaImg.push(file.name)
-
-        for(var x = 0;x<listaImg.length; x++){
-            console.log(listaImg[x]);
-
-        }
-        cont ++
+    function uploadFile(file) {
+        // Upload
         var inputFile = document.createElement('input')
-        dropArea.appendChild(inputFile).setAttribute('id',cont)
-        var algo = document.getElementById(cont)
-        algo.setAttribute('type','text')
-        algo.setAttribute('name','file_path[]')
-        algo.setAttribute('value', file.name)
-        algo.setAttribute('hidden','true')
-
-
-
+        inputFile.setAttribute('type','file')
+        inputFile.setAttribute('name','file_path[]')
+        inputFile.setAttribute('multiple','multiple')
+        inputFile.addEventListener("change", (event) => {
+            handleFiles(event.target.files)
+        })
+        dropArea.appendChild(inputFile)
     }
 </script>
 

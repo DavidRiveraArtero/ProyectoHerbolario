@@ -57,6 +57,7 @@ class AdminProductoController extends Controller
         ]);
 
 
+
         if($ok){
             $long = $request->file_path;
 
@@ -75,11 +76,19 @@ class AdminProductoController extends Controller
                 if(\Storage::disk('public')->exists($filePath)) {
 
                     $fullPath = \Storage::disk('public')->path($filePath);
-
-                    FotosProducto::create([
-                        'id_product' => $ok->id,
-                        'file_path' => $filePath,
-                    ]);
+                    if($x == 0){
+                        FotosProducto::create([
+                            'id_product' => $ok->id,
+                            'file_path' => $filePath,
+                            'activo'=> 1
+                        ]);
+                    }else{
+                        FotosProducto::create([
+                            'id_product' => $ok->id,
+                            'file_path' => $filePath,
+                            'activo'=> 0
+                        ]);
+                    }
 
                 }
             }

@@ -46,9 +46,16 @@
     <div class="contenedor_productos">
 
         @foreach($productos as $producto)
+
             <div class="productos">
                 <div class="imagen_producto ">
-                    <img src="https://www.herbolariodeconfianza.es/img/cms/Herbolario%20y%20salud%20natural.jpg" class="w-100">
+                    @foreach($FotosProducto as $foto)
+                        @if($foto->activo == true )
+                            @if($producto->id == $foto->id_product)
+                                <img src="{{asset('storage/'.$foto->file_path)}}" class="w-100">
+                            @endif
+                        @endif
+                    @endforeach
                 </div>
                 <div class="info_producto">
                     <p>Nombre Producto: {{$producto->nombre}}</p>
