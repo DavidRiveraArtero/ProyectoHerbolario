@@ -11,7 +11,7 @@
                     <a class="sub-item" href="{{route('productos.index')}}">Listar Productos</a>
                     <a class="sub-item" href="{{route('productos.create')}}">Crear Productos</a>
                     <a class="sub-item" href="{{route('usuarios.index')}}">Listar Usuarios</a>
-                    <a class="sub-item">Crear Usuarios</a>
+                    <a class="sub-item" href="{{route('usuarios.create')}}">Crear Usuarios</a>
                 </div>
             </div>
 
@@ -19,7 +19,7 @@
                 <a class="" href="">Home<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
                     <a class="sub-item" href="{{route('productos.index')}}">Inicio</a>
-                    <a class="sub-item" href="{{route('productos.create')}}">Perfil</a>
+                    <a class="sub-item" href="{{route('perfil.show',Auth::user())}}">Perfil</a>
                 </div>
             </div>
         </div>

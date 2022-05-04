@@ -64,7 +64,7 @@ class AdminProductoController extends Controller
 
             for($x = 0; $x < count($long); $x++){
                 $upload = $request->file('file_path');
-                $ruta = 'uploads/' . $request->nombre;
+                $ruta = 'uploads/' . $ok->id;
                 $fileName = $request->file('file_path')[$x]->getClientOriginalName();
                 $fileUpload = time() . "_" . $fileName;
                 $filePath = $upload[$x]->storeAs(
@@ -109,9 +109,9 @@ class AdminProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-
         return view("admin.productos.show",[
-            "producto" => $producto
+            "producto" => $producto,
+
         ]);
     }
 
@@ -123,8 +123,11 @@ class AdminProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
+        $fotos = FotosProducto::all()->where('id_product','=',$producto->id);
+
         return view("admin.productos.edit",[
-            "producto" => $producto
+            "producto" => $producto,
+            "fotos"=>$fotos
         ]);
     }
 
@@ -137,12 +140,52 @@ class AdminProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
+
         $request->validate([
             'nombre'=>'required',
             'descripcion'=>'required',
             'precio'=>'required',
             'cantidad'=>'required',
         ]);
+
+        $ok = $producto->updateOrFail([
+            'nombre' => $request->nombre,
+            'precio' => $request->precio,
+            'cantidad'=> $request->cantidad,
+            'descripcion' => $request->descripcion,
+        ]);
+        if($ok){
+            if($request->file_path) {
+                $long = $request->file_path;
+
+
+                for ($x = 0; $x < count($long); $x++) {
+                    $upload = $request->file('file_path');
+                    $ruta = 'uploads/' . $producto->id;
+                    $fileName = $request->file('file_path')[$x]->getClientOriginalName();
+                    $fileUpload = time() . "_" . $fileName;
+                    $filePath = $upload[$x]->storeAs(
+                        $ruta,
+                        $fileUpload,
+                        'public'
+                    );
+
+                    if (\Storage::disk('public')->exists($filePath)) {
+
+                        $fullPath = \Storage::disk('public')->path($filePath);
+
+                        FotosProducto::create([
+                            'id_product' => $producto->id,
+                            'file_path' => $filePath,
+                            'activo' => 0
+                        ]);
+
+                    }
+                }
+            }
+            return redirect()->route('productos.index')->with('success', 'Producto Actualizado');
+        }
+
     }
 
     /**

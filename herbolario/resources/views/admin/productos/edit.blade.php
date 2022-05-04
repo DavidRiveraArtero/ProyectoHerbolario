@@ -1,157 +1,127 @@
 @include('layoutsCompartido.head')
 <body>
-<header style="margin-bottom: 40px" >
-    <div class="txt-centrado marg-top15px">
-        <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Editar productos</span>
-        <h3 style="font-weight: bold;">Editar Producto</h3>
+    <header style="margin-bottom: 40px" >
+        <div class="txt-centrado marg-top15px">
+            <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Editar productos</span>
+            <h3 style="font-weight: bold;">Editar Producto</h3>
+        </div>
+    </header>
+    @include('layoutsCompartido.adminNavegacion')
+
+    <div id="contenedor_create" class="container">
+
+        <form method="POST" action="{{route('productos.update',$producto)}}" class="row" enctype="multipart/form-data">
+
+            @csrf
+            {{csrf_field()}}
+            @method('put')
+
+            <did class="contenedor_create_inputs col-xl-1">
+                <h3>Nombre Producto</h3>
+                <input class="contenedor_inputs_line" type="text" placeholder="Nombre Producto" name="nombre" value="{{$producto->nombre}}">
+            </did>
+
+            <div class="contenedor_create_inputs ">
+                <h3 >Precio Producto</h3>
+                <input class="contenedor_inputs_line" type="text" placeholder="Precio" name="precio" value="{{$producto->precio}}">
+            </div>
+
+            <div class="contenedor_create_inputs">
+                <h3>Descripcion</h3>
+                <input class="contenedor_inputs_line" type="text" placeholder="Descripcion" name="descripcion" value="{{$producto->descripcion}}">
+            </div>
+            <did class="contenedor_create_inputs">
+                <h3>Cantidad</h3>
+                <input class="contenedor_inputs_line" type="text" placeholder="Cantidad" name="cantidad" value="{{$producto->cantidad}}">
+            </did>
+            <div id="drop-area" class="input-file">
+
+                <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+                <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)" name="file_path[]"/>
+                <div id="gallery"></div>
+                <progress id="progress-bar" max=100 value=0></progress>
+            </div>
+            <button class="btn btn-primary col-lg-12" type="submit" id="send" style="float: right; margin-top:40px">Editar Producto</button>
+        </form>
     </div>
-</header>
-@include('layoutsCompartido.adminNavegacion')
-
-<div id="contenedor_create" class="container">
-
-    <form method="POST" action="{{route('productos.update',$producto)}}" class="row" >
-
-        @csrf
-        @method('post')
-
-        <did class="contenedor_create_inputs col-xl-1">
-            <h3>Nombre Producto</h3>
-            <input class="contenedor_inputs_line" type="text" placeholder="Nombre Producto" name="nombre" value="{{$producto->nombre}}">
-        </did>
-
-        <div class="contenedor_create_inputs ">
-            <h3 >Precio Producto</h3>
-            <input class="contenedor_inputs_line" type="text" placeholder="Precio" name="precio" value="{{$producto->precio}}">
-        </div>
-
-        <div class="contenedor_create_inputs">
-            <h3>Descripcion</h3>
-            <input class="contenedor_inputs_line" type="text" placeholder="Descripcion" name="descripcion" value="{{$producto->descripcion}}">
-        </div>
-        <did class="contenedor_create_inputs">
-            <h3>Cantidad</h3>
-            <input class="contenedor_inputs_line" type="text" placeholder="Cantidad" name="cantidad" value="{{$producto->cantidad}}">
-        </did>
-        <div id="drop-area" class="input-file">
-
-            <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
-
-            <label class="button" for="fileElem" onclick="handleFiles(this.files)">Select some files</label>
-            <div id="gallery" /></div>
-        <progress id="progress-bar" max=100 value=0></progress>
-
-</div>
-<button class="btn btn-primary col-lg-12" type="submit" id="send" style="float: right; margin-top:40px">Editar Producto</button>
-</form>
-
-</div>
 </body>
 
 <script>
-    var cont = 0;
-    var listaImg = [];
-    //var divInput = document.getElementById('drop-area')
+var cont = 0;
+//var divInput = document.getElementById('drop-area')
 
-    // ************************ Drag and drop ***************** //
-    let dropArea = document.getElementById("drop-area")
+// ************************ Drag and drop ***************** //
+let dropArea = document.getElementById("drop-area")
 
-        // Prevent default drag behaviors
-    ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropArea.addEventListener(eventName, preventDefaults, false)
-        document.body.addEventListener(eventName, preventDefaults, false)
-    })
+// Prevent default drag behaviors
+;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+dropArea.addEventListener(eventName, preventDefaults, false)
+document.body.addEventListener(eventName, preventDefaults, false)
+})
 
-    // Highlight drop area when item is dragged over it
-    ;['dragenter', 'dragover'].forEach(eventName => {
-        dropArea.addEventListener(eventName, highlight, false)
-    })
+// Highlight drop area when item is dragged over it
+;['dragenter', 'dragover'].forEach(eventName => {
+dropArea.addEventListener(eventName, highlight, false)
+})
 
-    ;['dragleave', 'drop'].forEach(eventName => {
-        dropArea.addEventListener(eventName, unhighlight, false)
-    })
+;['dragleave', 'drop'].forEach(eventName => {
+dropArea.addEventListener(eventName, unhighlight, false)
+})
 
-    // Handle dropped files
-    dropArea.addEventListener('drop', handleDrop, false)
+// Handle dropped files
+dropArea.addEventListener('drop', handleDrop, false)
 
-    function preventDefaults (e) {
-        e.preventDefault()
-        e.stopPropagation()
-    }
+function preventDefaults (e) {
+e.preventDefault()
+e.stopPropagation()
+}
 
-    function highlight(e) {
-        dropArea.classList.add('highlight')
-    }
+function highlight(e) {
+dropArea.classList.add('highlight')
+}
 
-    function unhighlight(e) {
-        dropArea.classList.remove('active')
-    }
+function unhighlight(e) {
+dropArea.classList.remove('active')
+}
 
-    function handleDrop(e) {
-        var dt = e.dataTransfer
-        var files = dt.files
+function handleDrop(e) {
+var dt = e.dataTransfer
+var files = dt.files
+files = [...files]
 
-        handleFiles(files)
+files.forEach(uploadFile)
+}
 
-    }
+function handleFiles(files) {
+console.log("handleFiles")
+files = [...files]
+files.forEach(uploadFile)
+files.forEach(previewFile)
+}
 
-    let uploadProgress = []
-    let progressBar = document.getElementById('progress-bar')
+function previewFile(file) {
+// Preview
+let reader = new FileReader()
 
-    function initializeProgress(numFiles) {
-        progressBar.value = 0
-        uploadProgress = []
+reader.readAsDataURL(file)
+reader.onloadend = function() {
+let img = document.createElement('img')
+img.src = reader.result
+console.log('files', file)
+document.getElementById('gallery').appendChild(img)
+}
+}
 
-        for(let i = numFiles; i > 0; i--) {
-            uploadProgress.push(0)
-
-        }
-
-    }
-
-    function updateProgress(fileNumber, percent) {
-        uploadProgress[fileNumber] = percent
-        let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
-        progressBar.value = total
-    }
-
-    function handleFiles(files) {
-        files = [...files]
-        initializeProgress(files.length)
-        files.forEach(uploadFile)
-        files.forEach(previewFile)
-
-    }
-
-    function previewFile(file) {
-        let reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onloadend = function() {
-            let img = document.createElement('img')
-            img.src = reader.result
-            document.getElementById('gallery').appendChild(img)
-        }
-    }
-
-    function uploadFile(file, i) {
-
-        listaImg.push(file.name)
-
-        for(var x = 0;x<listaImg.length; x++){
-            console.log(listaImg[x]);
-
-        }
-        cont ++
-        var inputFile = document.createElement('input')
-        dropArea.appendChild(inputFile).setAttribute('id',cont)
-        var algo = document.getElementById(cont)
-        algo.setAttribute('type','text')
-        algo.setAttribute('name','file_path[]')
-        algo.setAttribute('value', file.name)
-        algo.setAttribute('hidden','true')
-
-
-
-    }
+function uploadFile(file) {
+// Upload
+var inputFile = document.createElement('input')
+inputFile.setAttribute('type','file')
+inputFile.setAttribute('name','file_path[]')
+inputFile.setAttribute('multiple','multiple')
+inputFile.addEventListener("change", (event) => {
+handleFiles(event.target.files)
+})
+dropArea.appendChild(inputFile)
+}
 </script>
 

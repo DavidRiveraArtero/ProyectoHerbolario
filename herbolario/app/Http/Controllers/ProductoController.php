@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use App\Models\FotosProducto;
 use App\Models\Avatar_usuarios;
+use App\Models\User;
+use App\Models\comentario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,6 +69,8 @@ class ProductoController extends Controller
 
         $producto = Producto::where('id',$id)->first();
 
+        $cometario = comentario::all()->where('id_producto','=',$id);
+
 
         if(Auth::user()) {
             $fotoUser = Avatar_usuarios::all()->where('id_usuario','=',Auth::user()->id);
@@ -74,7 +78,9 @@ class ProductoController extends Controller
             return view("home.show", [
                 "producto" => $producto,
                 "fotoProducto" => $fotoProducto,
-                "FotoUsuario" => $fotoUser
+                "FotoUsuario" => $fotoUser,
+                "comentarios" => $cometario,
+                'usuarios'=> User::all()
 
 
             ]);
@@ -82,7 +88,8 @@ class ProductoController extends Controller
             return view("home.show", [
                 "producto" => $producto,
                 "fotoProducto" => $fotoProducto,
-               
+                "comentarios" => $cometario,
+                'usuarios'=> User::all()
 
 
             ]);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Roles_usuario;
 use App\Models\Avatar_usuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +30,10 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = (Roles_usuario::all());
+        return view('admin.users.create',[
+            "rolesUsuario"=>$roles
+        ]);
     }
 
     /**
@@ -44,21 +48,24 @@ class AdminUserController extends Controller
             "nombre"=>'required',
             'email'=>'required|email',
             'password'=>'required|min:9',
-            'rol'=>'required'
+            'rol'=>'required',
+            'file_path'=>'required'
         ]);
 
         $request->old('nombre');
-        if($request->rol == "user"){
-            $rol = 2;
-        }else{
-            $rol = 1;
+
+        $roles = Roles_usuario::all();
+        for($x = 0 ; $x < count($roles);$x++){
+            if($request->rol == $roles[$x]->name){
+                $rol = $roles[$x]->id;
+            }
         }
 
         $ok = User::create([
             'name'=>$request->nombre,
             'email'=>$request->email,
             'password'=> Hash::make($request->password),
-            'role_id'=>$rol
+            'role_id'=>$rol,
         ]);
 
 
@@ -115,9 +122,15 @@ class AdminUserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user, $id)
     {
-        //
+        $roles = (Roles_usuario::all());
+        $user = User::all()->where('id','=',$id)->first();
+
+        return view('admin.users.edit',[
+            "usuario"=>$user,
+            "rolesUsuario"=>$roles
+        ]);
     }
 
     /**
@@ -127,9 +140,62 @@ class AdminUserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user, $id)
     {
-        //
+        $user = User::all()->where('id','=',$id)->first();
+
+        $request->validate([
+            "nombre"=>'required',
+            'password'=>'required|min:9',
+            'rol'=>'required',
+
+        ]);
+
+        $roles = Roles_usuario::all();
+        for($x = 0 ; $x < count($roles);$x++){
+            if($request->rol == $roles[$x]->name){
+                $rol = $roles[$x]->id;
+            }
+        }
+
+
+        $ok = $user->updateOrFail([
+            'name'=>$request->nombre,
+            'password'=> Hash::make($request->password),
+            'role_id'=>$rol,
+        ]);
+        if($ok){
+            if($request->file_path){
+                $long = $request->file_path;
+
+                for($x = 0; $x < count($long); $x++){
+                    $upload = $request->file('file_path');
+                    $ruta = 'uploads/users/'.$user->email;
+                    $fileName = $request->file('file_path')[$x]->getClientOriginalName();
+                    $fileUpload = time() . "_" . $fileName;
+                    $filePath = $upload[$x]->storeAs(
+                        $ruta,
+                        $fileUpload,
+                        'public'
+                    );
+
+                    if(\Storage::disk('public')->exists($filePath)) {
+
+                        $fullPath = \Storage::disk('public')->path($filePath);
+
+                        Avatar_usuarios::create([
+                            'id_usuario' => $user->id,
+                            'file_path' => $filePath,
+                            'activo' => 0
+                        ]);
+                    }
+                }
+            }
+            return redirect()->route('usuarios.index')->with('success', 'Usuario Actualizado');
+        }else{
+            return redirect()->route('usuarios.index')->with('success', 'ERROR');
+        }
+
     }
 
     /**

@@ -2,8 +2,8 @@
 <body>
 <header style="margin-bottom: 40px" >
     <div class="txt-centrado marg-top15px">
-        <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Añadir usuario</span>
-        <h3 style="font-weight: bold;">Añadir Usuario</h3>
+        <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Actualizar usuario</span>
+        <h3 style="font-weight: bold;">Actualizar Usuario</h3>
     </div>
 </header>
 @include('layoutsCompartido.adminNavegacion')
@@ -14,25 +14,21 @@
             {{ session()->get('error') }}
         </div>
     @endif
-    <form method="POST" action="{{route('usuarios.store')}}" class="row" enctype="multipart/form-data">
+    <form method="POST" action="{{route('usuarios.update',$usuario,$usuario)}}" class="row" enctype="multipart/form-data">
 
         @csrf
         {{csrf_field()}}
-        @method('post')
+        @method('put')
 
         <did class="contenedor_create_inputs col-xl-1">
             <h3>Nombre Usuario</h3>
-            <input class="contenedor_inputs_line" type="text" placeholder="Nombre Usuario" name="nombre" value="{{ old('nombre') }}">
+            <input class="contenedor_inputs_line" type="text" placeholder="Nombre Usuario" name="nombre" value="{{$usuario->name}}">
         </did>
 
-        <div class="contenedor_create_inputs ">
-            <h3>Email</h3>
-            <input class="contenedor_inputs_line" type="email" placeholder="Correo" name="email">
-        </div>
 
         <div class="contenedor_create_inputs">
             <h3>Password</h3>
-            <input class="contenedor_inputs_line" type="password" placeholder="Contraseña" name="password">
+            <input class="contenedor_inputs_line" type="password" placeholder="Nueva Contraseña" name="password">
         </div>
         <did class="contenedor_create_inputs">
             <h3>Role</h3>
@@ -50,7 +46,7 @@
             <div id="gallery" /></div>
         <progress id="progress-bar" max=100 value=0></progress>
 </div>
-<button class="btn btn-primary col-lg-12" type="submit" id="send" style="float: right; margin-top:40px">Crear Usuario</button>
+<button class="btn btn-primary col-lg-12" type="submit" id="send" style="float: right; margin-top:40px">Actualizar Usuario</button>
 </form>
 </div>
 </body>

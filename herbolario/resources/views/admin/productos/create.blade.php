@@ -42,6 +42,7 @@
                 <progress id="progress-bar" max=100 value=0></progress>
             </div>
             <button class="btn btn-primary col-lg-12" type="submit" id="send" style="float: right; margin-top:40px">Crear Producto</button>
+
         </form>
     </div>
 </body>

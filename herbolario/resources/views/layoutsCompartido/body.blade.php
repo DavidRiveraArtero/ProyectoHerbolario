@@ -4,4 +4,5 @@
     @include('layoutsCompartido.header')
     @yield('content')
     </body>
+    @yield('script')
 </html>

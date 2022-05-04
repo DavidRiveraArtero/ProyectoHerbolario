@@ -1,67 +1,74 @@
-<header class="fixed-top">
-    <div class=""> <!--SE PUEDE PROVAR CON CONTAINER-->
-        <div class="row">
-            <div class="col-xl-3 col-lg-5 col-4" id="contenedor-titulo" style="padding-left: 140px; text-aling:center;">
-                <h2>Nombre de la tienda</h2>
-            </div>
+<div class="fixed-top">
+    <nav class="navbar navbar-dark " style="height: auto; background-color:#9BD682;!important">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" >
+                <span class="navbar-toggler-icon" ></span>
+            </button>
+            <h2 style="color: white">El herbolario de Ana</h2>
 
-            <div class="input-group col-xl-5 col-lg-4 col-2 " id="contenedor-input">
-                <input type="text" placeholder="Buscador" id="buscador">
-                <span class="input-group-text btn btn-secondary">Search</span>
-            </div>
-
-            <!-- No logeado -->
             @guest
-                <div class="col-xl-2 col-lg-2 col-sm-2  dropdown" id="contenedor_usuario" style="padding-right: 100px">
-                    <a href="{{route("login")}}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                        </svg><span class="bi bi-person-circle" id="nombre_user">Login</span></a>
-                </div>
-
-            <!-- REGISTRADO -->
-            @else
-                <div class="col-xl-2 col-lg-1 col-sm-2  dropdown" id="contenedor_usuario">
-                    @foreach($FotoUsuario as $avatar)
-                        @if($avatar->activo == "1")
-                            <div class="" style="height: 80px; float: left">
-                                <img src="{{asset("storage/". $avatar->file_path)}}" style="border-radius: 50%; height: 100%">
-                            </div>
-                        @endif
-                    @endforeach
-                    <span class="bi bi-person-circle" id="nombre_user" s> {{ Auth::user()->name }}</span>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-top: 80px">
-                        <h3 style="text-align: center;">Menu user</h3>
-                        <hr>
-                        <!-- MI CUENTA -->
-                        <a class="dropdown-item" href="{{route("perfil.show",Auth::user())}}">Mi cuenta</a>
-                        <!-- LOGOUT -->
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </div>
-
-            @endif
-
-            <!-- Carrito -->
-            <div class="col-xl-1 col-lg-1 col-sm-1 " id="contenedor_carrito">
-                <a href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                    </svg><span class="bi bi-cart">2</span>
+            <div class="dropdown" id="" style="">
+                <a class="btn bg-light" href="{{route("login")}}">
+                   <span>Login</span>
                 </a>
             </div>
+            @else
+
+            <div class="dropdown" id="">
+                @foreach($FotoUsuario as $avatar)
+                    @if($avatar->activo == "1")
+                        <div class="" style="height: 80px; float: left">
+                            <img src="{{asset("storage/". $avatar->file_path)}}" style="border-radius: 50%; height: 100%">
+                        </div>
+                    @endif
+                @endforeach
+                <span class="bi bi-person-circle" id="nombre_user" s> {{ Auth::user()->name }}</span>
+
+            </div>
+
+        @endif
 
         </div>
+    </nav>
+
+
+    <div class="collapse " id="header" >
+        <div class="bg-white p-4 contenedor_dropdown" >
+            <div class="menu" style="margin-top: 0">
+                @if(Auth::user())
+                    <div class="item">
+                        <a class="" href="">Menu User<i class="fas fa-angle-right dropdown"></i></a>
+                        <div class="sub-menu">
+                            <a class="dropdown-item sub-item" href="{{route("perfil.show",Auth::user())}}"><h5>Mi cuenta</h5></a>
+
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                <h5>{{ __('Logout') }}</h5>
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+
+                            <a class="dropdown-item sub-item" href="{{route("perfil.show",Auth::user())}}"><h5>Carrito</h5></a>
+                            @if(Auth::user()->role_id == 1)
+                                <a class="dropdown-item sub-item" href="{{route("productos.index")}}"><h5>Intranet</h5></a>
+                            @endif
+                        </div>
+                    </div>
+                    @else
+                    <div class="item"><a class="" href="{{route("login")}}">Iniciar Sesion<i class="fas fa-angle-right dropdown"></i></a></div>
+                    <div class="item"><a class="" href="{{route("register")}}">Registro<i class="fas fa-angle-right dropdown"></i></a></div>
+                @endif
+
+                <div class="item"><a class="" href="{{route('contactanos.index')}}">Contacto<i class="fas fa-angle-right dropdown"></i></a></div>
+                <div class="item"><a class="" href="">Quienes somos<i class="fas fa-angle-right dropdown"></i></a></div>
+
+
+            </div>
+        </div>
     </div>
-</header>
+</div>
 
 

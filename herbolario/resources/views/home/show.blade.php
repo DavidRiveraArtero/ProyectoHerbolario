@@ -72,17 +72,50 @@
         </div>
     </div>
     <div class="container marg-top45px">
-        <div class="row">
-            <div class="col-lg-6" style="">
+        <div class="row contenedor_comentarios" >
+
+            <div class="col-lg-6" style="margin-top: 20px;">
                 <h3>Nombre Producto: <span>{{$producto->nombre}}</span></h3>
-                <h3>Precio: <span>{{$producto->precio}}</span></h3>
+                <h3>Precio: <span>{{$producto->precio}}$</span></h3>
                 <h3>Unidades: <span>{{$producto->cantidad}}</span></h3>
-                <a class="btn btn-info">Añadir al carrito</a>
+                <a class="btn btn-info" style="margin-bottom: 14px">Añadir al carrito</a>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6"  style="margin-top: 20px;">
                 <h1>Descripcion</h1>
                 <h3>{{$producto->descripcion}}</h3>
             </div>
+        </div>
+    </div>
+
+    <div class="container marg-top45px">
+
+        <div class="row">
+            <h2 class="col-lg-12 " style="text-align: center; margin-bottom: 40px">Comentarios</h2>
+
+            @if(Auth::user())
+                <div class="contenedor_comentarios">
+                    <h4>{{Auth::user()->name}} - Añadir Comentario</h4>
+
+                    <form method="post" action="{{route("productos.comentarios.store", $producto)}}">
+                        @csrf
+                        @method('post')
+
+                        <textarea placeholder="Comentario" name="comentario" class="col-lg-12 col-12" rows="8"></textarea>
+                        <button type="submit" class="btn btn-success col-12">Enviar</button>
+                    </form>
+                </div>
+            @endif
+            @foreach($comentarios as $comentario)
+                <div class="col-lg-12" style="border: 1px solid black;border-radius: 10px; margin-bottom: 60px">
+                    @foreach($usuarios as $usuario)
+                        @if($comentario->id_usuario == $usuario->id)
+                            <h4>{{$usuario->name}} - Created: {{$comentario->created_at}}</h4>
+                            <hr>
+                        @endif
+                    @endforeach
+                    <h5>{{$comentario->comentario}}</h5>
+                </div>
+            @endforeach
         </div>
     </div>
 

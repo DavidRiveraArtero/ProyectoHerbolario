@@ -360,6 +360,14 @@ table.tareas{
     font-size: 120%;
     font-family: "Times New Roman";
 }
+
+.border_bottom{
+    border-bottom: 3px solid black;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
 .input-file{
     margin-left: 430px;
 }
@@ -370,6 +378,14 @@ table.tareas{
     background-position: center;
     height: 200px;
 
+}
+
+.contenedor_comentarios{
+    background-color: white;
+    margin-bottom:30px;
+
+    border-radius:10px;
+    box-shadow: 0 4px 6px 0 rgba(22, 26, 0.18);
 }
 
 

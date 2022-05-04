@@ -2,16 +2,16 @@
 @include('layoutsCompartido.head')
 <body class="login">
 
-    <div class="container marg-top100px" style="background-color: white; border-radius:25px ">
+    <div class="container marg-top100px" style="background-color: white; border-radius:25px; box-shadow: 0 4px 6px 0 rgba(22, 26, 0.18); ">
         <div class="row justify-content-center">
-            <h1 class="col-lg-12" style="text-align: center">Login</h1>
+            <h1 class="col-lg-12 marg-top45px" style="text-align: center">Iniciar Sesión</h1>
             <form method="POST" action="{{ route('login') }}" class="marg-top45px">
                 @csrf
 
                 <div class="row justify-content-center">
                     <h4 style="text-align: center" for="email" class="col-md-12">{{ __('Email Address') }}</h4>
                     <div class="col-md-6">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Correo Electronico">
+                        <input id="email" type="email" class="form-control border_bottom @error('email') is-invalid @enderror " name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Correo Electronico" >
 
                         @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -21,11 +21,11 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-center marg-top30px">
+                <div class="row justify-content-center marg-top30px" >
                     <h4 style="text-align: center" for="password" class="col-md-12">{{ __('Password') }}</h4>
 
                     <div class="col-md-6">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Contraseña">
+                        <input id="password" type="password" class="form-control border_bottom @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Contraseña">
 
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -61,22 +61,16 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-    <div class="container marg-top45px">
-        <div class="row justify-content-center">
-
-            <div class="col-lg-7" style=" height: 30px; border-bottom: 1px solid black; text-align: center">
-                <span style="font-size: 40px; background-color: #F3F5F6; padding: 0 9px;">
+            <div class="col-lg-7 marg-top15px" style=" height: 30px; border-bottom: 1px solid black; text-align: center">
+                <span style="font-size: 40px; background-color: #ffffff; padding: 0 9px;">
                  ¿Eres nuevo?
                 </span>
             </div>
 
             <div class="col-lg-12"></div><br/><br/>
-            <a href="{{route('register')}}" class="btn btn-danger col-lg-5">Crear Cuenta</a>
-
+            <a href="{{route('register')}}" class="btn btn-danger col-lg-5" style="margin-bottom: 40px">Crear Cuenta</a>
         </div>
-
     </div>
+
 
 </body>

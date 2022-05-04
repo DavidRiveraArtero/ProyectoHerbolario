@@ -5,6 +5,9 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\AdminProductoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\comentarioController;
+use App\Http\Controllers\ContactaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,8 +36,12 @@ Route::resource('admin/usuarios', AdminUserController::class)->middleware(['auth
 // REGISTER
 Route::resource('user', UserController::class);
 
+// Comentario
+Route::resource('productos.comentarios', comentarioController::class);
+
 Route::resource('perfil',UserController::class)->middleware(['auth']);
 
+Route::resource('contactanos', ContactaController::class);
 
 Route::get('/login',function (){
     return view('auth/login');
