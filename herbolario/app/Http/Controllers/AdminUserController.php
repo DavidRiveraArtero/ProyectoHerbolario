@@ -8,6 +8,7 @@ use App\Models\Avatar_usuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Models\direccione;
 
 class AdminUserController extends Controller
 {
@@ -208,11 +209,26 @@ class AdminUserController extends Controller
     {
         $user = User::all()->where('id','=',$id)->first();
 
-        $storageDisk = Avatar_usuarios::where('id_usuario',$user->id)->get();
+        $storageDisk = Avatar_usuarios::where('id_usuario','=',$user->id)->get();
 
-        Storage::disk('public')->delete($storageDisk[0]->file_path);
 
-        $foto_id = Avatar_usuarios::where('id_usuario',$user->id)->delete();
+        $direcciones = direccione::all()->where('id_usuario','=',$user->id);
+
+
+        if(count($direcciones)>0){
+
+            foreach ($direcciones as $key => $direccion){
+
+                $direccion->delete();
+            }
+        }
+
+        if(count($storageDisk)>0){
+            Storage::disk('public')->delete($storageDisk[0]->file_path);
+        }
+
+
+        Avatar_usuarios::where('id_usuario',$user->id)->delete();
 
         $user->delete();
 

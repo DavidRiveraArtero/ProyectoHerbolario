@@ -37,13 +37,13 @@
 
             </div>
 
-            <a href="#" class="col-lg-5 contenedor_opciones_user" style="background-image: url('https://depor.com/resizer/cdd_l1-KbEZArsh774BFj-7aWZo=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/FJNHB6ARHFAI3EUBW3GAQFQD5U.jpg'); margin-bottom:40px; color: black" >
+            <a href="{{route('direccion.index')}}" class="col-lg-5 contenedor_opciones_user" style="background-image: url('https://depor.com/resizer/cdd_l1-KbEZArsh774BFj-7aWZo=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/FJNHB6ARHFAI3EUBW3GAQFQD5U.jpg'); margin-bottom:40px; color: black" >
                 <h3 class="txt-centrado" style="padding-top: 85px">Editar direccion</h3>
             </a>
 
 
 
-            <a href="#" class="col-lg-5 contenedor_opciones_user" style="background-image: url('https://depor.com/resizer/cdd_l1-KbEZArsh774BFj-7aWZo=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/FJNHB6ARHFAI3EUBW3GAQFQD5U.jpg'); color: black" >
+            <a href="{{route('contactanos.index')}}" class="col-lg-5 contenedor_opciones_user" style="background-image: url('https://depor.com/resizer/cdd_l1-KbEZArsh774BFj-7aWZo=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/FJNHB6ARHFAI3EUBW3GAQFQD5U.jpg'); color: black" >
                 <h3 class="txt-centrado" style="padding-top: 85px">Contactanos</h3>
             </a>
 
@@ -57,10 +57,10 @@
             </a>
 
             <!-- CONTENEDOR FANTASMA -->
-            <div class="col-lg-4">
+            <div class="col-lg-3">
 
             </div>
-            <a href="#" class="col-lg-5 contenedor_opciones_user" style="background-image: url('http://pasosparacrearunblog.co/wp-content/uploads/2015/10/banner-como-configurar-wordpress-2.png'); margin-top: 40px; color: black" >
+            <a href="#" class="col-lg-5 contenedor_opciones_user" style="background-image: url('http://pasosparacrearunblog.co/wp-content/uploads/2015/10/banner-como-configurar-wordpress-2.png'); margin-top: 40px; color: black; margin-bottom: 40px" >
                 <h3 class="txt-centrado" style="padding-top: 85px">Configurar</h3>
             </a>
         </div>

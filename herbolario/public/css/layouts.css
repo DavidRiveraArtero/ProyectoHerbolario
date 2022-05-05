@@ -269,11 +269,6 @@ table.tareas{
     padding-left: 80px;
 }
 
-
-
-
-
-
 .marg-bot15px{
     margin-bottom: 15px;
 }
@@ -388,6 +383,25 @@ table.tareas{
     box-shadow: 0 4px 6px 0 rgba(22, 26, 0.18);
 }
 
+.container-direccion_plus{
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px 0 rgba(22, 26, 0.18);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.container-direccion_plus:hover{
+    transform: scale(1.1);
+}
+
+.form_direccion{
+    height: auto;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px 0 rgba(22, 26, 0.18);
+}
 
 
 /*RESPONSIVE*/

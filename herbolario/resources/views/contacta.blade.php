@@ -17,15 +17,16 @@
                 <div class="row">
                     <div class="col-lg-7">
                         <h1 style="text-align: center">Contacta con nosotros</h1>
-                        <form>
+                        <form method="post" action="{{route('contactanos.store')}}">
+                            @csrf
                             <div class="col-lg-12 marg-top15px" style="float: left">
                                 <!-- Nombre -->
                                 <div class="col-lg-6 col-12" style="float: left">
                                     <h3 class="">Su nombre *</h3>
                                     @if(Auth::user())
-                                        <input class="col-lg-10 col-12" type="text" value="{{Auth::user()->name}}">
+                                        <input name="nombre" class="col-lg-10 col-12" type="text" value="{{Auth::user()->name}}" readonly>
                                     @else
-                                        <input class="col-lg-10 col-12" type="text">
+                                        <input name="nombre" class="col-lg-10 col-12" type="text">
                                     @endif
                                 </div>
 
@@ -33,9 +34,9 @@
                                 <div class="col-lg-6 col-12" style="float: left">
                                     <h3>Email *</h3>
                                     @if(Auth::user())
-                                        <input class="col-lg-10 col-12" type="email" value="{{Auth::user()->email}}">
+                                        <input name="email" class="col-lg-10 col-12" type="email" value="{{Auth::user()->email}}" readonly>
                                     @else
-                                        <input class="col-lg-10 col-12" type="text">
+                                        <input name="email" class="col-lg-10 col-12" type="text">
                                     @endif
                                 </div>
                             </div>
@@ -43,13 +44,13 @@
                             <div class="col-lg-12 col-12 marg-top45px" style="float: left">
                                 <div class="col-lg-12 col-12" style="float: left">
                                     <h3 class="">Asunto *</h3>
-                                    <input class="col-lg-11 col-12" type="text">
+                                    <input name="asunto" class="col-lg-11 col-12" type="text">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-12 marg-top45px" style="float: left">
                                 <div class="col-lg-12 col-12" style="float: left">
                                     <h3 class="">Mensaje *</h3>
-                                    <textarea class="col-lg-11 col-12" type="text" rows="4"></textarea>
+                                    <textarea name="mensaje" class="col-lg-11 col-12" type="text" rows="4"></textarea>
                                 </div>
                             </div>
 
