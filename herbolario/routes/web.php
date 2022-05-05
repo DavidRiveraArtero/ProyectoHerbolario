@@ -26,7 +26,7 @@ Route::get('/', function () {
 // PRODUCTOS HOME
 Route::resource('home',ProductoController::class);
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
 // ADMIN
 Route::resource('admin/productos', AdminProductoController::class)->middleware(['auth', 'role:1']);
@@ -39,7 +39,7 @@ Route::resource('user', UserController::class);
 // Comentario
 Route::resource('productos.comentarios', comentarioController::class);
 
-Route::resource('perfil',UserController::class)->middleware(['auth']);
+Route::resource('perfil',UserController::class)->middleware(['auth','verified']);
 
 Route::resource('contactanos', ContactaController::class);
 

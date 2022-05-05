@@ -1,7 +1,11 @@
 
 @include('layoutsCompartido.head')
 <body class="login">
-
+    @if(session()->has('success'))
+        <div class="alert alert-success" style="width: 100%; height: auto; position:static!important;">
+            {{ session()->get('success') }}
+        </div>
+    @endif
     <div class="container marg-top100px" style="background-color: white; border-radius:25px; box-shadow: 0 4px 6px 0 rgba(22, 26, 0.18); ">
         <div class="row justify-content-center">
             <h1 class="col-lg-12 marg-top45px" style="text-align: center">Iniciar Sesión</h1>

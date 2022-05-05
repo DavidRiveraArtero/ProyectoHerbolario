@@ -13,37 +13,56 @@
     <div class="container" style="margin-bottom: 15px">
         <div class="row">
         <div class="col-lg-12" id="map" style="height: 400px;"></div>
-            <div class="container">
+            <div class="container marg-top45px">
                 <div class="row">
                     <div class="col-lg-7">
                         <h1 style="text-align: center">Contacta con nosotros</h1>
+                        <form>
+                            <div class="col-lg-12 marg-top15px" style="float: left">
+                                <!-- Nombre -->
+                                <div class="col-lg-6 col-12" style="float: left">
+                                    <h3 class="">Su nombre *</h3>
+                                    @if(Auth::user())
+                                        <input class="col-lg-10 col-12" type="text" value="{{Auth::user()->name}}">
+                                    @else
+                                        <input class="col-lg-10 col-12" type="text">
+                                    @endif
+                                </div>
 
-                        <div class="col-lg-12 marg-top15px" style="float: left">
-                            <!-- Nombre -->
-                            <div class="col-lg-6 col-12" style="float: left">
-                                <h3 class="">Su nombre *</h3>
-                                <input class="col-lg-10 col-12" type="text">
+                                <!-- EMAIL -->
+                                <div class="col-lg-6 col-12" style="float: left">
+                                    <h3>Email *</h3>
+                                    @if(Auth::user())
+                                        <input class="col-lg-10 col-12" type="email" value="{{Auth::user()->email}}">
+                                    @else
+                                        <input class="col-lg-10 col-12" type="text">
+                                    @endif
+                                </div>
+                            </div>
+                            <!-- ASUNTO -->
+                            <div class="col-lg-12 col-12 marg-top45px" style="float: left">
+                                <div class="col-lg-12 col-12" style="float: left">
+                                    <h3 class="">Asunto *</h3>
+                                    <input class="col-lg-11 col-12" type="text">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-12 marg-top45px" style="float: left">
+                                <div class="col-lg-12 col-12" style="float: left">
+                                    <h3 class="">Mensaje *</h3>
+                                    <textarea class="col-lg-11 col-12" type="text" rows="4"></textarea>
+                                </div>
                             </div>
 
-                            <!-- EMAIL -->
-                            <div class="col-lg-6 col-12" style="float: left">
-                                <h3>Email *</h3>
-                                <input class="col-lg-10 col-12" type="text">
-                            </div>
-                        </div>
-                        <!-- ASUNTO -->
-                        <div class="col-lg-12 marg-top45px" style="float: left">
-                            <div class="col-lg-12 col-12" style="float: left">
-                                <h3 class="">Asunto *</h3>
-                                <input class="col-lg-11 col-12" type="text">
-                            </div>
-                        </div>
-                        <div class="col-lg-12 marg-top45px" style="float: left">
-                            <div class="col-lg-12 col-12" style="float: left">
-                                <h3 class="">Mensaje *</h3>
-                                <textarea class="col-lg-11 col-12" type="text" rows="4"></textarea>
-                            </div>
-                        </div>
+                            <button class="btn btn-primary col-lg-6 marg-top15px" type="submit">Enviar</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <h1 style="text-align: center">Oficina</h1>
+                        <h3 class="col-lg-12 marg-top45px"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/><path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/></svg> Direccion: La que sea</h3>
+                        <h3 class="marg-top45px"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-telephone-outbound-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM11 .5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-4.146 4.147a.5.5 0 0 1-.708-.708L14.293 1H11.5a.5.5 0 0 1-.5-.5z"/></svg>  Telefono: 111111111 </h3>
+                        <hr class="marg-top45px">
+                        <h1 class="marg-top45px" style="text-align: center">Horario Comercial</h1>
+                        <h5>Lunes - Viernes de 9:00 a 14:00 y de 16:00 a 19:00</h5>
                     </div>
                 </div>
             </div>

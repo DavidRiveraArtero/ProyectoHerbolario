@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Avatar_usuarios;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class UserController extends Controller
 {
@@ -44,12 +45,17 @@ class UserController extends Controller
             'password'=>'required|min:8|confirmed'
         ]);
 
-        return User::create([
+        $user = User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=> Hash::make($request->password),
-            'role_id'=>1
+            'role_id'=>2
         ]);
+
+        $user->sendEmailVerificationNotification();
+
+        return redirect('login')->with('success','Cuenta Creada. Verifique su cuenta en el correo');
+
     }
 
     /**

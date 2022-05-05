@@ -52,7 +52,7 @@
                     @foreach($FotosProducto as $foto)
                         @if($foto->activo == true )
                             @if($producto->id == $foto->id_product)
-                                <img src="{{asset('storage/'.$foto->file_path)}}" class="w-100">
+                                <img src="{{asset('storage/' .$foto->file_path)}}" class="w-100">
                             @endif
                         @endif
                     @endforeach

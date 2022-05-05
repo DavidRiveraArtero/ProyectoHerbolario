@@ -22,7 +22,7 @@
                         </div>
                     @endif
                 @endforeach
-                <span class="bi bi-person-circle" id="nombre_user" s> {{ Auth::user()->name }}</span>
+                <span class="bi bi-person-circle" id="nombre_user" > {{ Auth::user()->name }}</span>
 
             </div>
 

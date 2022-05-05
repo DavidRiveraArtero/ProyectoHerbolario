@@ -18,7 +18,7 @@
             <div class="item">
                 <a class="" href="">Home<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
-                    <a class="sub-item" href="{{route('productos.index')}}">Inicio</a>
+                    <a class="sub-item" href="{{route('home.index')}}">Inicio</a>
                     <a class="sub-item" href="{{route('perfil.show',Auth::user())}}">Perfil</a>
                 </div>
             </div>
