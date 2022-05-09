@@ -75,10 +75,20 @@
         <div class="row contenedor_comentarios" >
 
             <div class="col-lg-6" style="margin-top: 20px;">
+                @if(session()->has('success'))
+                    <div class="alert alert-success" style="width: 100%; height: auto; position:static!important;">
+                        {{ session()->get('success') }}
+                    </div>
+                @endif
                 <h3>Nombre Producto: <span>{{$producto->nombre}}</span></h3>
                 <h3>Precio: <span>{{$producto->precio}}$</span></h3>
                 <h3>Unidades: <span>{{$producto->cantidad}}</span></h3>
-                <a class="btn btn-info" style="margin-bottom: 14px">Añadir al carrito</a>
+                <form method="post" action="{{route('carrito.store')}}">
+                    @csrf
+                    @method('post')
+                    <input readonly name="id" type="text" value="{{$producto->id}}" style="display: none">
+                    <button type="submit" class="btn btn-info" style="margin-bottom: 14px">Añadir al carrito</button>
+                </form>
             </div>
             <div class="col-lg-6"  style="margin-top: 20px;">
                 <h1>Descripcion</h1>

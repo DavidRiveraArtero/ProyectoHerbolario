@@ -9,6 +9,9 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\comentarioController;
 use App\Http\Controllers\ContactaController;
 use App\Http\Controllers\direccionController;
+use App\Http\Controllers\carritoController;
+use App\Http\Controllers\comandaController;
+use App\Http\Controllers\misPedidosController;
 use Illuminate\Http\Request;
 use App\Models\Avatar_usuarios;
 /*
@@ -48,10 +51,22 @@ Route::resource('productos.comentarios', comentarioController::class);
 Route::resource('perfil',UserController::class)->middleware(['auth','verified']);
 
 // CONTACTANOS
-Route::resource('contactanos', ContactaController::class);
+Route::resource('contactanos', ContactaController::class)->middleware(['auth','verified']);;
 
 // Direccion
-Route::resource('direccion', direccionController::class);
+Route::resource('direccion', direccionController::class)->middleware(['auth','verified']);;
+
+// Carrito
+Route::resource('carrito',carritoController::class)->middleware(['auth','verified']);;
+
+// COMANDA
+Route::resource('comanda',comandaController::class)->middleware(['auth','verified']);;
+
+// MIS PEDIDOS
+Route::resource('misPedidos',misPedidosController::class);
+
+// PAYPAL STATUS
+Route::get('/paypal/status',[comandaController::class,'payPalStatus']);
 
 // LOGIN
 Route::get('/login',function (){

@@ -17,7 +17,7 @@
             <div class="dropdown" id="">
                 @foreach($FotoUsuario as $avatar)
                     @if($avatar->activo == "1")
-                        <div class="" style="height: 80px; float: left">
+                        <div  style="height: 40px; float: left;width: 40px">
                             <img src="{{asset("storage/". $avatar->file_path)}}" style="border-radius: 50%; height: 100%">
                         </div>
                     @endif
@@ -51,7 +51,7 @@
                                 @csrf
                             </form>
 
-                            <a class="dropdown-item sub-item" href="{{route("perfil.show",Auth::user())}}"><h5>Carrito</h5></a>
+                            <a class="dropdown-item sub-item" href="{{route("carrito.index",Auth::user())}}"><h5>Carrito</h5></a>
                             @if(Auth::user()->role_id == 1)
                                 <a class="dropdown-item sub-item" href="{{route("productos.index")}}"><h5>Intranet</h5></a>
                             @endif

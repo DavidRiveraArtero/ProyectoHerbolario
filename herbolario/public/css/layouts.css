@@ -27,7 +27,7 @@ header{
 
 #nombre_user{
     padding-left: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     float: left;
 }
 #contenedor_carrito{
@@ -402,6 +402,22 @@ table.tareas{
     border-radius: 20px;
     box-shadow: 0 4px 6px 0 rgba(22, 26, 0.18);
 }
+
+/*TABLA COMANDA*/
+table.table_comanda tr th, table.table_comanda tr td{
+    text-align: center;
+    font-weight: bold;
+}
+table.table_comanda{
+    float:left;
+    width: 100%;
+
+    background-color: whitesmoke;
+    margin:auto;
+
+}
+
+
 
 
 /*RESPONSIVE*/

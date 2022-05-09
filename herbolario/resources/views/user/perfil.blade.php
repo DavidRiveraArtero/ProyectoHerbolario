@@ -28,7 +28,7 @@
 
     <div class="container marg-top45px">
         <div class="row ">
-            <a href="#" class="col-lg-5 contenedor_opciones_user" style="background-image: url('https://st.depositphotos.com/1000128/4913/i/600/depositphotos_49136251-stock-photo-cardboard-boxes.jpg'); margin-bottom:40px; color: black" >
+            <a href="{{route('misPedidos.index')}}" class="col-lg-5 contenedor_opciones_user" style="background-image: url('https://st.depositphotos.com/1000128/4913/i/600/depositphotos_49136251-stock-photo-cardboard-boxes.jpg'); margin-bottom:40px; color: black" >
                 <h3 class="txt-centrado" style="padding-top: 85px">Mis Pedidos</h3>
             </a>
 
