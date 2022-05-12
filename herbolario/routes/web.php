@@ -12,6 +12,8 @@ use App\Http\Controllers\direccionController;
 use App\Http\Controllers\carritoController;
 use App\Http\Controllers\comandaController;
 use App\Http\Controllers\misPedidosController;
+use App\Http\Controllers\categoriaController;
+use App\Http\Controllers\quienesSomosController;
 use Illuminate\Http\Request;
 use App\Models\Avatar_usuarios;
 /*
@@ -65,8 +67,15 @@ Route::resource('comanda',comandaController::class)->middleware(['auth','verifie
 // MIS PEDIDOS
 Route::resource('misPedidos',misPedidosController::class);
 
+// CATEGORIAS
+Route::get("categoria/{categoria}", [categoriaController::class,'categoria'])->name('categoria');
+
 // PAYPAL STATUS
 Route::get('/paypal/status',[comandaController::class,'payPalStatus']);
+
+// Quienes somos
+Route::get('/quienes_somos',[quienesSomosController::class , 'index'])->name('quienes_somos');
+
 
 // LOGIN
 Route::get('/login',function (){

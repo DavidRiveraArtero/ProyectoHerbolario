@@ -6,6 +6,7 @@ use App\Models\comanda;
 use App\Models\Avatar_usuarios;
 use App\Models\FotosProducto;
 
+use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\lista_producto;
@@ -24,10 +25,14 @@ class misPedidosController extends Controller
         $listaP = lista_producto::all()->where('id_usuario','=',Auth::user()->id);
         $listaP = $listaP->where('finalizado','=',true);
         $listaFoto = [];
+        $productos = [];
 
-        for($x = 0;$x<count($listaP);$x++){
-            array_push($listaFoto, FotosProducto::all()->where('id_product','=',$listaP[$x]->id_producto)->first());
+
+        foreach ($listaP as $key => $lista){
+            array_push($listaFoto, FotosProducto::all()->where('id_product','=',$lista->id_producto)->first());
+            array_push($productos, Producto::all()->where('id','=',$lista->id_producto)->first());
         }
+
 
 
 
@@ -35,7 +40,8 @@ class misPedidosController extends Controller
             'FotoUsuario'=>$avatar,
             'comandas'=>$comanda,
             'foto_producto'=>$listaFoto,
-            'listaP'=>$listaP
+            'listaP'=>$listaP,
+            'productos'=>$productos
         ]);
     }
 

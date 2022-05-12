@@ -63,7 +63,7 @@
                 @endif
 
                 <div class="item"><a class="" href="{{route('contactanos.index')}}">Contacto<i class="fas fa-angle-right dropdown"></i></a></div>
-                <div class="item"><a class="" href="">Quienes somos<i class="fas fa-angle-right dropdown"></i></a></div>
+                <div class="item"><a class="" href="{{route('quienes_somos')}}">Quienes somos<i class="fas fa-angle-right dropdown"></i></a></div>
 
 
             </div>

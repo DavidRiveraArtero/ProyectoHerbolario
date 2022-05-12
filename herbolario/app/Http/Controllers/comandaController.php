@@ -55,11 +55,11 @@ class comandaController extends Controller
 
             // PAYPAL
             $payer = new Payer();
-            $payer->setPaymentMethod('paypal');
+            $payer->setPaymentMethod('paypal'); // METODO DE PAGO
 
             $amount = new Amount();
-            $amount->setTotal($precio);
-            $amount->setCurrency('EUR');
+            $amount->setTotal($precio); // PRECIO QUE PAGARA EL USUARIO
+            $amount->setCurrency('EUR'); // LA MONENDA
 
             $transaction = new Transaction();
             $transaction->setAmount($amount);
@@ -105,9 +105,14 @@ class comandaController extends Controller
             $listaP = lista_producto::all()->where('id_usuario','=',Auth::user()->id);
             $listaP = $listaP->where('finalizado','=',0);
 
+
             foreach ($listaP as $lista) {
                 $producto = Producto::all()->where('id', '=', $lista->id_producto)->first();
                 $precio += $producto->precio;
+                $producto->updateOrFail([
+                   'cantidad'=>$producto->cantidad - 1
+                ]);
+
             }
 
             $ok = comanda::create([

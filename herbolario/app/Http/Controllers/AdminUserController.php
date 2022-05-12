@@ -149,7 +149,6 @@ class AdminUserController extends Controller
             "nombre"=>'required',
             'password'=>'required|min:9',
             'rol'=>'required',
-
         ]);
 
         $roles = Roles_usuario::all();

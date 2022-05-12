@@ -131,7 +131,7 @@ nav{
 #wrapper ul{
 
     width: 100%;
-    margin-left: 4%;
+
     height: 100%;
     text-align: center;
 }
@@ -346,7 +346,7 @@ table.tareas{
 }
 
 #contenedor_create form .contenedor_create_inputs .contenedor_inputs_line{
-    width: 70%;
+    width: 60%;
     border-bottom: 4px solid black;
     border-top: 0px;
     border-left: 0px;
@@ -411,11 +411,83 @@ table.table_comanda tr th, table.table_comanda tr td{
 table.table_comanda{
     float:left;
     width: 100%;
-
-    background-color: whitesmoke;
     margin:auto;
 
 }
+
+/*QUIENES SOMOS PARALLAX*/
+
+.parallax{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+}
+
+
+
+
+.video{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.video video {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.parallax .contenido svg:hover{
+    color: #0c4128;
+}
+#p{
+
+    height: 40vh;
+    background-image: url("../img/1.jpg");
+    background-position: 1000px 150px ;
+    background-size: 1000px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+.body_quienes_somos{
+    display: flex;
+    font-weight: bold;
+    width: 100%;
+    height: 80vh;
+    text-align: center;
+}
+
+#persona1 {
+    border-radius: 50%;
+    height: 30vh;
+    background-image: url("../img/animales-felices-portada-1280x720x80xX.jpg");
+    background-position: 50px 100px;
+    background-size: 1000px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+#persona2{
+
+    border-radius: 50%;
+    height: 30vh;
+    background-image: url("../img/ghost_5965d71c_800x600.jpg");
+    background-position: 800px 0px ;
+    background-size: 1000px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
 
 
 
@@ -441,6 +513,10 @@ table.table_comanda{
         width: 50%;
     }
 
+    #p{
+        background-position: -5000px 200px ;
+    }
+
 }
 @media (max-width: 1428px){
     .contenedor_productos{
@@ -453,9 +529,18 @@ table.table_comanda{
         margin-left: 3%;
         height: auto;
     }
+
+    #drop-area{
+           margin-left: 0;
+    }
+
+    #p{
+        background-position: 300px 200px ;
+    }
+
 }
 
-@media (max-width: 800px) {
+@media (max-width: 920px) {
     .productos{
         width: 47%;
         margin: 0% auto;
@@ -492,10 +577,19 @@ table.table_comanda{
         height: 17%;
         transition: all ease-in-out .2s;
     }
+    #drop-area{
+        margin-left: 0;
+    }
 
 
+    #p{
+        background-position: 0px 200px ;
+    }
 
 }
+
+
+
 
 @media (max-width: 558px) {
     .productos{
@@ -526,6 +620,15 @@ table.table_comanda{
         width: 100%;
         height: 17%;
         transition: all ease-in-out .2s;
+    }
+    #drop-area{
+        margin-left: 0;
+    }
+    .col-12{
+        width: 100%!important;
+    }
+    #p{
+        background-position: -300px 200px ;
     }
 
 

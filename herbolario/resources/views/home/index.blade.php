@@ -1,6 +1,6 @@
 @extends('layoutsCompartido.body')
 @section('content')
-    <div class="marg-top100px pos-f-t" id='contenedor-nav'>
+    <div class="pos-f-t" style="margin-top: 60px" id='contenedor-nav'>
         <!-- BOTON RESPONSIVE -->
           <nav class="navbar navbar-dark bg-dark" style="display:none;" id='prenav'>
             <div class="container-fluid">
@@ -15,13 +15,12 @@
 
                 <div id="wrapper" >
                     <ul>
-
-                        <li><a href="">TÉS</a></li>
-                        <li><a href="">INFUSIONES</a></li>
-                        <li ><a href="">DIETÉTICOS</a></li>
-                        <li ><a href="">NUTRICIÓN DEPORTIVA</a></li>
-                        <li ><a href="">ALIMENTACIÓN SALUDABLE</a></li>
-                        <li ><a href="">INCIENSOS</a></li>
+                        <li><a href="{{route('categoria','tes')}}">TÉS</a></li>
+                        <li><a href="{{route('categoria','infusiones')}}">INFUSIONES</a></li>
+                        <li ><a href="{{route('categoria','dieteticos')}}">DIETÉTICOS</a></li>
+                        <li ><a href="{{route('categoria','nutricion_deportiva')}}">NUTRICIÓN DEPORTIVA</a></li>
+                        <li ><a href="{{route('categoria','alimentacion_saludable')}}">ALIMENTACIÓN SALUDABLE</a></li>
+                        <li ><a href="{{route('categoria','incienso')}}">INCIENSOS</a></li>
                     </ul>
                 </div>
             </nav>
@@ -31,13 +30,13 @@
           <nav class="" id='nav-container'>
             <div id="wrapper" >
                 <ul>
-
-                    <li><a href="">TÉS</a></li>
-                    <li><a href="">INFUSIONES</a></li>
-                    <li ><a href="">DIETÉTICOS</a></li>
-                    <li ><a href="">NUTRICIÓN DEPORTIVA</a></li>
-                    <li ><a href="">ALIMENTACIÓN SALUDABLE</a></li>
-                    <li ><a href="">INCIENSOS</a></li>
+                    <li><a href="{{route('categoria','todo')}}">Todos</a></li>
+                    <li><a href="{{route('categoria','tes')}}">TÉS</a></li>
+                    <li><a href="{{route('categoria','infusiones')}}">INFUSIONES</a></li>
+                    <li ><a href="{{route('categoria','dieteticos')}}">DIETÉTICOS</a></li>
+                    <li ><a href="{{route('categoria','nutricion_deportiva')}}">NUTRICIÓN DEPORTIVA</a></li>
+                    <li ><a href="{{route('categoria','alimentacion_saludable')}}">ALIMENTACIÓN SALUDABLE</a></li>
+                    <li ><a href="{{route('categoria','incienso')}}">INCIENSOS</a></li>
                 </ul>
             </div>
         </nav>
@@ -59,7 +58,7 @@
                 </div>
                 <div class="info_producto">
                     <p>Nombre Producto: {{$producto->nombre}}</p>
-                    <p>Precio: {{$producto->precio}}</p>
+                    <p>Precio: {{$producto->precio}}€</p>
                     <p>Descripcion: {{$producto->descripcion}}</p>
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto btn_producto_info">

@@ -2,7 +2,7 @@
 @section('content')
 
     <!-- Segundo header -->
-    <div class="" style="margin-bottom: 40px; margin-top:80px; background-color: #9BD682; border-top:1px solid black; height: 80px" >
+    <div class="" style="margin-bottom: 40px; margin-top:52px; background-color: #9BD682; border-top:1px solid black; height: 80px" >
         <div class="txt-centrado marg-top15px">
             <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Añadir productos</span>
             <h3 style="font-weight: bold;">{{$producto->nombre}}</h3>
@@ -64,7 +64,7 @@
         <div class="row">
             @php($cont = 0)
             @foreach ($fotoProducto as $key => $foto)
-                <div class="col-lg-2 col-sm-3 " style="float: left; margin-top: 20px">
+                <div class="col-lg-2 col-4 " style="float: left; margin-top: 20px">
                     <img type="button" data-bs-target="#demo" data-bs-slide-to="{{ $cont }}" src="{{asset("storage/".$foto->file_path)}}" alt="Chicago" class="d-block w-100" style="height: 100%; opacity: 1!important;">
                     @php($cont++)
                 </div>
@@ -87,7 +87,11 @@
                     @csrf
                     @method('post')
                     <input readonly name="id" type="text" value="{{$producto->id}}" style="display: none">
-                    <button type="submit" class="btn btn-info" style="margin-bottom: 14px">Añadir al carrito</button>
+                    @if($producto->cantidad != 0)
+                        <button type="submit"  class="btn btn-info" style="margin-bottom: 14px">Añadir al carrito</button>
+                    @else
+                        <button type="submit" disabled class="btn btn-info" style="margin-bottom: 14px">Añadir al carrito</button>
+                    @endif
                 </form>
             </div>
             <div class="col-lg-6"  style="margin-top: 20px;">
@@ -100,7 +104,7 @@
     <div class="container marg-top45px">
 
         <div class="row">
-            <h2 class="col-lg-12 " style="text-align: center; margin-bottom: 40px">Comentarios</h2>
+            <h1 class="col-lg-12 " style=" margin-bottom: 40px">Comentarios</h1>
 
             @if(Auth::user())
                 <div class="contenedor_comentarios">
@@ -111,6 +115,7 @@
                         @method('post')
 
                         <textarea placeholder="Comentario" name="comentario" class="col-lg-12 col-12" rows="8"></textarea>
+
                         <button type="submit" class="btn btn-success col-12">Enviar</button>
                     </form>
                 </div>
@@ -119,11 +124,11 @@
                 <div class="col-lg-12" style="border: 1px solid black;border-radius: 10px; margin-bottom: 60px">
                     @foreach($usuarios as $usuario)
                         @if($comentario->id_usuario == $usuario->id)
-                            <h4>{{$usuario->name}} - Created: {{$comentario->created_at}}</h4>
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>{{$usuario->name}} - Created: {{$comentario->created_at}}</h4>
                             <hr>
                         @endif
                     @endforeach
-                    <h5>{{$comentario->comentario}}</h5>
+                    <h6 style="">{{$comentario->comentario}}</h6>
                 </div>
             @endforeach
         </div>

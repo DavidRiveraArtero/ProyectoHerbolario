@@ -68,16 +68,21 @@ class carritoController extends Controller
      */
     public function store(Request $request)
     {
+        $store = Producto::all()->where('id','=',$request->id)->first();
+        if($store->cantidad != 0){
+            $ok = lista_producto::create([
+                'id_usuario'=>Auth::user()->id,
+                'id_producto'=>$request->id,
+                'finalizado'=>false
+            ]);
 
-        $ok = lista_producto::create([
-            'id_usuario'=>Auth::user()->id,
-            'id_producto'=>$request->id,
-            'finalizado'=>false
-        ]);
-
-        if($ok){
-            return Redirect::back()->with('success','Elemento agregado al carrito');
+            if($ok){
+                return Redirect::back()->with('success','Elemento agregado al carrito');
+            }
+        }else{
+            return Redirect::back()->with('success','Lo sentimos no tenemos stock');
         }
+
 
     }
 
