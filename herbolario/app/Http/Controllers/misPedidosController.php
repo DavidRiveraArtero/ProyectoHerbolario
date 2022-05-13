@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\comanda;
 use App\Models\Avatar_usuarios;
 use App\Models\FotosProducto;
-
 use App\Models\Producto;
+use App\Models\direccione;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\lista_producto;
@@ -26,22 +26,25 @@ class misPedidosController extends Controller
         $listaP = $listaP->where('finalizado','=',true);
         $listaFoto = [];
         $productos = [];
-
+        $direccions = [];
+        $direccion = direccione::all()->where('id_usuario','=',Auth::user()->id);
 
         foreach ($listaP as $key => $lista){
             array_push($listaFoto, FotosProducto::all()->where('id_product','=',$lista->id_producto)->first());
             array_push($productos, Producto::all()->where('id','=',$lista->id_producto)->first());
         }
 
-
-
+        foreach ($comanda as $com){
+            array_push($direccions, $direccion->where('id','=',$com->id_direccion)->first());
+        }
 
         return view('user.pedidos.misPedidos',[
             'FotoUsuario'=>$avatar,
             'comandas'=>$comanda,
             'foto_producto'=>$listaFoto,
             'listaP'=>$listaP,
-            'productos'=>$productos
+            'productos'=>$productos,
+            'direccions'=>$direccions
         ]);
     }
 

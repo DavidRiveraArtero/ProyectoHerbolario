@@ -11,6 +11,8 @@ class comanda extends Model
     protected $table = 'comanda';
     protected $fillable = [
         'id_usuario',
-        'precio_final'
+        'precio_final',
+        'id_direccion',
+        'estado'
     ];
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\lista_producto;
 use App\Models\FotosProducto;
 use App\Models\Producto;
+use App\Models\direccione;
 use Illuminate\Http\Request;
 use App\Models\Avatar_usuarios;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class carritoController extends Controller
 
         $avatar = Avatar_usuarios::all()->where('id_usuario','=',Auth::user()->id);
         $listaP = lista_producto::all()->where('id_usuario','=',Auth::user()->id);
-
+        $direcciones = direccione::all()->where('id_usuario','=',Auth::user()->id);
         $listaP = $listaP->where('finalizado','=','0');
 
         $precio = 0;
@@ -46,7 +47,8 @@ class carritoController extends Controller
             'FotoUsuario'=>$avatar,
             'precioF'=>$precio,
             'fotoProducto'=>$FotoProducto,
-            'producto'=> $Productos
+            'producto'=> $Productos,
+            'direcciones'=>$direcciones
         ]);
     }
 

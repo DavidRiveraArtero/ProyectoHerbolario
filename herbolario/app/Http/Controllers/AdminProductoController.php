@@ -17,6 +17,7 @@ class AdminProductoController extends Controller
      */
     public function index()
     {
+        $this->prue();
         return view('admin.productos.index',[
             "productos"=>Producto::paginate(10)
         ]);
@@ -205,5 +206,9 @@ class AdminProductoController extends Controller
         $producto->delete();
 
         return redirect()->route('productos.index')->with('success', 'Producto eliminado');
+    }
+
+    public function prue(){
+        return "hola";
     }
 }

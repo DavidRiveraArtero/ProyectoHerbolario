@@ -9,10 +9,15 @@
 
     <div class="container">
         <div class="row">
+            @if(session()->has('success'))
+                <div class="alert alert-success" style="width: 100%; height: auto; position:static!important;">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
 
             @foreach($fotoProducto as $key => $foto)
 
-                <div class="col-lg-12" style="margin-bottom: 45px">
+                <div class="col-lg-6" style="margin-bottom: 45px">
                     <img class="col-lg-5" src="{{asset('storage/'.$foto->file_path)}}" style="float: left">
 
                     <h3 class="col-lg-7" style="float: left">Producto: {{$producto[$key]->nombre}}</h3>
@@ -27,19 +32,28 @@
                     </form>
                 </div>
             @endforeach
-            @if(session()->has('success'))
-                <div class="alert alert-success" style="width: 100%; height: auto; position:static!important;">
-                    {{ session()->get('success') }}
-                </div>
-            @endif
 
-            <h4>Precio Total = {{$precioF}}$</h4>
-            <form method="post" action="{{route('comanda.store')}}">
-                @csrf
-                @method('post')
-                <input readonly name="precio" type="hidden" value="{{$precioF}}">
-                <button type="submit" class="btn btn-success">Finalizar Compra</button>
-            </form>
+
+
+                <div class="col-lg-6" id="contenedor_direccion">
+                    <h2 class="col-lg-12" style="text-align: center">Direcciones</h2>
+                    <form method="post" action="{{route('comanda.store')}}" style="margin-top: 30px">
+                        @csrf
+                        @method('post')
+                        <select class="col-lg-12" style="margin-bottom: 30px" name="id_direccion">
+                            @foreach($direcciones as $direccion)
+                                <option value="{{$direccion->id}}">{{$direccion->linea_direccion}}</option>
+                            @endforeach
+                        </select>
+                        <h4>Precio Total = {{$precioF}}$</h4>
+
+                        <input readonly name="precio" type="hidden" value="{{$precioF}}">
+                        <button type="submit" class="btn btn-success">Finalizar Compra</button>
+                    </form>
+                </div>
+
+
+
         </div>
     </div>
 @endsection

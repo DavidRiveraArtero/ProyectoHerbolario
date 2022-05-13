@@ -68,15 +68,13 @@ header{
 /* Contenedor de Producto  */
 .contenedor_productos{
     width: 100%;
-    height: 1500px;
 }
 /* La caja de cada producto  */
 .productos{
     font-size: 18px;
+    margin-left: 125px;
     float: left;
-    margin-left: 200px;
     margin-top: 60px;
-    width: 20%;
     border: 1px solid black;
     border-radius: 5px;
     background-color: #F6F6F6;
@@ -286,7 +284,6 @@ table.tareas{
     border: 2px dashed #ccc;
     border-radius: 20px;
     width: auto;
-    font-family: sans-serif;
     margin: 100px auto;
     padding: 20px;
     float: left;
@@ -341,7 +338,7 @@ table.tareas{
 
 #contenedor_create form .contenedor_create_inputs h3{
     margin-bottom: 40px;
-    font-family: Roboto;
+
 
 }
 
@@ -353,7 +350,7 @@ table.tareas{
     border-right: 0px;
     background:#F6F6F6;
     font-size: 120%;
-    font-family: "Times New Roman";
+
 }
 
 .border_bottom{
@@ -451,8 +448,7 @@ table.table_comanda{
     color: #0c4128;
 }
 #p{
-
-    height: 40vh;
+    height: 45vh;
     background-image: url("../img/1.jpg");
     background-position: 1000px 150px ;
     background-size: 1000px;
@@ -488,7 +484,11 @@ table.table_comanda{
     background-repeat: no-repeat;
 }
 
-
+#contenedor_direccion{
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: white;
+}
 
 
 
@@ -510,7 +510,7 @@ table.table_comanda{
     }
 
     .productos{
-        width: 50%;
+        width: 33.33%;
     }
 
     #p{
@@ -593,10 +593,7 @@ table.table_comanda{
 
 @media (max-width: 558px) {
     .productos{
-        width: 100%;
-        margin: 0% auto;
-        margin-bottom: 40px;
-        height: auto;
+
     }
     #responsive-nav{
 

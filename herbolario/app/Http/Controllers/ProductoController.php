@@ -6,6 +6,7 @@ use App\Models\Producto;
 use App\Models\FotosProducto;
 use App\Models\Avatar_usuarios;
 use App\Models\User;
+use App\Models\lista_producto;
 use App\Models\comentario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,7 +73,12 @@ class ProductoController extends Controller
         $cometario = comentario::all()->where('id_producto','=',$id);
 
 
+
         if(Auth::user()) {
+            $loCompro = lista_producto::all()->where('id_usuario','=',Auth::user()->id);
+            $loCompro = $loCompro->where('id_producto','=',$id);
+            $loCompro = $loCompro->where('id_comanda','<>',"");
+
             $fotoUser = Avatar_usuarios::all()->where('id_usuario','=',Auth::user()->id);
 
             return view("home.show", [
@@ -80,7 +86,8 @@ class ProductoController extends Controller
                 "fotoProducto" => $fotoProducto,
                 "FotoUsuario" => $fotoUser,
                 "comentarios" => $cometario,
-                'usuarios'=> User::all()
+                'usuarios'=> User::all(),
+                'loCompro'=>$loCompro
 
 
             ]);

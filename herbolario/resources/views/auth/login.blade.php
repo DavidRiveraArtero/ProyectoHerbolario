@@ -72,7 +72,7 @@
             </div>
 
             <div class="col-lg-12"></div><br/><br/>
-            <a href="{{route('register')}}" class="btn btn-danger col-lg-5" style="margin-bottom: 40px">Crear Cuenta</a>
+            <a href="{{route('register')}}" class="btn btn-danger col-lg-5 col-4" style="margin-bottom: 40px">Crear Cuenta</a>
         </div>
     </div>
 

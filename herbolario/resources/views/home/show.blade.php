@@ -13,7 +13,7 @@
     <div class="marg-top45px container">
 
 
-        <div id="demo" class="carousel slide" data-bs-ride="carousel" style="height: 40%;  ">
+        <div id="demo" class="carousel slide col-lg-12" data-bs-ride="carousel" style="height: 40%;  ">
 
             <!-- Indicators/dots -->
             <div class="carousel-indicators" style="height: auto">
@@ -107,6 +107,7 @@
             <h1 class="col-lg-12 " style=" margin-bottom: 40px">Comentarios</h1>
 
             @if(Auth::user())
+                @if(count($loCompro)>0)
                 <div class="contenedor_comentarios">
                     <h4>{{Auth::user()->name}} - Añadir Comentario</h4>
 
@@ -119,6 +120,7 @@
                         <button type="submit" class="btn btn-success col-12">Enviar</button>
                     </form>
                 </div>
+                @endif
             @endif
             @foreach($comentarios as $comentario)
                 <div class="col-lg-12" style="border: 1px solid black;border-radius: 10px; margin-bottom: 60px">

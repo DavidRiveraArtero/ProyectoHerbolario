@@ -30,7 +30,7 @@
           <nav class="" id='nav-container'>
             <div id="wrapper" >
                 <ul>
-                    <li><a href="{{route('categoria','todo')}}">Todos</a></li>
+                    <li><a href="{{route('categoria','todo')}}">TODOS</a></li>
                     <li><a href="{{route('categoria','tes')}}">TÉS</a></li>
                     <li><a href="{{route('categoria','infusiones')}}">INFUSIONES</a></li>
                     <li ><a href="{{route('categoria','dieteticos')}}">DIETÉTICOS</a></li>
@@ -42,30 +42,32 @@
         </nav>
     </div>
     <!-- Modificar con los parametros reales de la base de datos -->
-    <div class="contenedor_productos">
+    <div class="">
+        <div class="contenedor_productos row">
 
-        @foreach($productos as $producto)
-
-            <div class="productos">
-                <div class="imagen_producto ">
-                    @foreach($FotosProducto as $foto)
-                        @if($foto->activo == true )
-                            @if($producto->id == $foto->id_product)
-                                <img src="{{asset('storage/' .$foto->file_path)}}" class="w-100">
+            @foreach($productos as $producto)
+                <div class="productos col-lg-2 col-12">
+                    <div class="imagen_producto ">
+                        @foreach($FotosProducto as $foto)
+                            @if($foto->activo == true )
+                                @if($producto->id == $foto->id_product)
+                                    <img src="{{asset('storage/' .$foto->file_path)}}" class="w-100">
+                                @endif
                             @endif
-                        @endif
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <div class="info_producto">
+                        <p>Nombre Producto: {{$producto->nombre}}</p>
+                        <p>Precio: {{$producto->precio}}€</p>
+                        <p>Descripcion: {{$producto->descripcion}}</p>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto btn_producto_info">
+                        <a href="{{route('home.show', $producto,$producto->id)}}" class="btn btn-success">Info</a>
+                    </div>
                 </div>
-                <div class="info_producto">
-                    <p>Nombre Producto: {{$producto->nombre}}</p>
-                    <p>Precio: {{$producto->precio}}€</p>
-                    <p>Descripcion: {{$producto->descripcion}}</p>
-                </div>
-                <div class="d-grid gap-2 col-6 mx-auto btn_producto_info">
-                    <a href="{{route('home.show', $producto,$producto->id)}}" class="btn btn-success">Info</a>
-                </div>
-            </div>
-        @endforeach
+
+            @endforeach
+        </div>
     </div>
 
 @endsection

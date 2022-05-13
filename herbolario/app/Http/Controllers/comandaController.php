@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\comanda;
 use App\Models\lista_producto;
 use App\Models\Producto;
+use App\Models\direccione;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ use PayPal\Api\Payer;
 use PayPal\Api\Amount;
 use PayPal\Api\Transaction;
 use PayPal\Api\RedirectUrls;
-
+use App\Mail\SendMail;
 
 class comandaController extends Controller
 {
@@ -52,6 +53,12 @@ class comandaController extends Controller
                 $producto = Producto::all()->where('id', '=', $lista->id_producto)->first();
                 $precio += $producto->precio;
             }
+            comanda::create([
+                'id_direccion'=>$request->id_direccion,
+                'id_usuario' => Auth::user()->id,
+                'estado'=>0
+            ]);
+
 
             // PAYPAL
             $payer = new Payer();
@@ -105,6 +112,8 @@ class comandaController extends Controller
             $listaP = lista_producto::all()->where('id_usuario','=',Auth::user()->id);
             $listaP = $listaP->where('finalizado','=',0);
 
+            $comanda = comanda::all()->where('id_usuario','=',Auth::user()->id);
+            $comanda = $comanda->where('estado','=',0)->first();
 
             foreach ($listaP as $lista) {
                 $producto = Producto::all()->where('id', '=', $lista->id_producto)->first();
@@ -115,26 +124,31 @@ class comandaController extends Controller
 
             }
 
-            $ok = comanda::create([
-                'id_usuario' => Auth::user()->id,
+            $ok = $comanda->updateOrFail([
                 'precio_final' => $precio,
+                'estado'=>1
             ]);
 
-            if ($ok) {
-                foreach ($listaP as $lista)
-                    $lista->updateOrFail([
-                        'id_comanda' => $ok->id,
-                        'finalizado' => true
-                    ]);
-            }
+            foreach ($listaP as $lista)
+                $lista->updateOrFail([
+                    'id_comanda' => $comanda->id,
+                    'finalizado' => true
+                ]);
 
 
+            \Mail::to('dariar@fp.insjoaquimmir.cat')->send()
             $status = "Gracias. El pago a traves de PayPal se ha realizado correctamente.";
+            return Redirect::back()->with('success', $status);
+        }else{
+            $comanda = comanda::all()->where('id_usuario','=',Auth::user()->id);
+            $comanda = $comanda->where('estado','=',0)->first();
+
+            $comanda->delete();
+            $status = "Lo sentimos. El pago a traves de PayPal no se pudo realizar.";
             return Redirect::back()->with('success', $status);
         }
 
-        $status = "Lo sentimos. El pago a traves de PayPal no se pudo realizar.";
-        return Redirect::back()->with('success', $status);
+
 
     }
 }

@@ -9,10 +9,10 @@
     </div>
     <div class="container">
         <div class="row">
-
-                @foreach($comandas as $comanda)
+                @php($cont2 = 0)
+                @foreach($comandas as $key => $comanda)
                     <div class="col-lg-7 form_direccion" style=" height:auto; margin-bottom:40px">
-                        <div class="col-lg-12 " style="border-bottom: 1px solid black; float: left;height: auto" >
+                        <div class="col-lg-12 col-12" style="border-bottom: 1px solid black; float: left;height: auto" >
                             <table class="table_comanda">
                                 <tr>
                                     <td>Pedido Realizado</td>
@@ -23,11 +23,13 @@
                                 <tr>
                                     <td>{{$comanda->created_at}}</td>
                                     <td>{{$comanda->precio_final}}$</td>
-                                    <td>{{Auth::user()->name}}</td>
+                                    <td>{{$direccions[$cont2]->linea_direccion}}</td>
                                     <td>{{$comanda->id}}</td>
                                 </tr>
                             </table>
+                            @php($cont2++)
                         </div>
+
                         @php($cont = 0)
                         @foreach($listaP as $key => $lista)
 
