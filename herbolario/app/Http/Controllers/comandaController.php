@@ -6,7 +6,7 @@ use App\Models\comanda;
 use App\Models\lista_producto;
 use App\Models\Producto;
 use App\Models\direccione;
-
+use App\Models\FotosProducto;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +20,7 @@ use PayPal\Api\Payer;
 use PayPal\Api\Amount;
 use PayPal\Api\Transaction;
 use PayPal\Api\RedirectUrls;
-use App\Mail\SendMail;
+use App\Mail\AdminProductosCompradoMail;
 
 class comandaController extends Controller
 {
@@ -121,7 +121,6 @@ class comandaController extends Controller
                 $producto->updateOrFail([
                    'cantidad'=>$producto->cantidad - 1
                 ]);
-
             }
 
             $ok = $comanda->updateOrFail([
@@ -134,11 +133,31 @@ class comandaController extends Controller
                     'id_comanda' => $comanda->id,
                     'finalizado' => true
                 ]);
+            $direccion = direccione::all()->where('id','=',$comanda->id_direccion)->first();
+            $listaProductos = [];
+            $fotoProducto = [];
 
+            foreach ($listaP as $lista) {
+                array_push($listaProductos,  Producto::all()->where('id', '=', $lista->id_producto)->first());
+                array_push($fotoProducto, FotosProducto::all()->where('id_product','=',$lista->id_producto)->first());
+            }
 
-            \Mail::to('dariar@fp.insjoaquimmir.cat')->send()
+            $details = [
+                'NombreUser'=>Auth::user()->name,
+                'correo'=>Auth::user()->email,
+                'telefono'=> $direccion->telefono,
+                'direccion_envio'=>$direccion->linea_direccion,
+                'codigo_postal'=>$direccion->codigo_postal,
+                'provincia'=>$direccion->provincia,
+                'ciudad' =>$direccion->ciudad,
+                'productos'=>$listaProductos,
+                'foto_producto'=>$fotoProducto
+            ];
+            \Mail::to('dariar@fp.insjoaquimmir.cat')->send(new AdminProductosCompradoMail($details));
             $status = "Gracias. El pago a traves de PayPal se ha realizado correctamente.";
             return Redirect::back()->with('success', $status);
+
+
         }else{
             $comanda = comanda::all()->where('id_usuario','=',Auth::user()->id);
             $comanda = $comanda->where('estado','=',0)->first();

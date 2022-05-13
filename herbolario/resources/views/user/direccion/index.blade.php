@@ -1,6 +1,6 @@
 @extends('layoutsCompartido.body')
 @section('content')
-    <div class="" style="margin-bottom: 40px; margin-top:80px; background-color: #9BD682; border-top:1px solid black; height: 80px" >
+    <div class="" style="margin-bottom: 40px; margin-top:50px; background-color: #9BD682; border-top:1px solid black; height: 80px" >
         <div class="txt-centrado marg-top15px">
             <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Lista Direccion</span>
             <h3 style="font-weight: bold;">Lista Direccion</h3>
