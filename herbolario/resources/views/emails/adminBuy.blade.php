@@ -29,9 +29,11 @@
 @php($cont = 0)
 @foreach($details['productos'] as $producto)
     <h1>Nombre Producto: {{$producto->nombre}}</h1>
-    @foreach($details['foto_producto'] as $foto)
-     <img src="{{asset('storage/'.$foto->file_path)}}">
-    @endforeach
+    <div style="width: 25%; height: 200px">
+        @foreach($details['foto_producto'] as $foto)
+            <img style="width: 100%" src="{{asset('storage/'.$foto->file_path)}}">
+        @endforeach
+    </div>
     @php($cont++)
 @endforeach
 

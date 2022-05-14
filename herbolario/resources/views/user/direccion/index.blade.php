@@ -24,13 +24,17 @@
             @foreach($direcciones as $direccion)
                 <div class="col-lg-1"></div>
                 <div class="col-lg-3 container-direccion_plus">
-                    <h4 style="text-align: left">Nombre: {{$direccion->nombre}}</h4>
-                    <h4 style="text-align: left">Pais: {{$direccion->pais}}</h4>
-                    <h4 style="text-align: left">Provincia: {{$direccion->provincia}}</h4>
-                    <h4 style="text-align: left">Codigo Postal: {{$direccion->codigo_postal}}</h4>
-                    <h4 style="text-align: left">Telefono: {{$direccion->telefono}}</h4>
-                    <h4 style="text-align: left">Direccion: {{$direccion->linea_direccion}}</h4>
-                    <a href="{{route('direccion.show',$direccion,$direccion->id)}}" class="btn btn-primary">Editar</a>
+                    <p id="direccion_p_con_negrita">{{$direccion->nombre}}</p>
+
+                    <p id="direccion_p_sin_negrita">{{$direccion->linea_direccion}}</p>
+
+                    <p id="direccion_p_sin_negrita">{{$direccion->ciudad}}, {{$direccion->provincia}}, {{$direccion->codigo_postal}}</p>
+
+                    <p id="direccion_p_sin_negrita">{{$direccion->pais}}</p>
+
+                    <p id="direccion_p_sin_negrita">Telefono: {{$direccion->telefono}}</p>
+
+                    <a style="margin-top: 20px" href="{{route('direccion.show',$direccion,$direccion->id)}}" class="btn btn-primary">Editar</a>
                 </div>
             @endforeach
         </div>

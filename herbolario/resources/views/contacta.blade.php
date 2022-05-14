@@ -15,13 +15,13 @@
         <div class="col-lg-12" id="map" style="height: 400px;"></div>
             <div class="container marg-top45px">
                 <div class="row">
-                    <div class="col-lg-7">
+                    <div class="col-lg-8" >
                         <h1 style="text-align: center">Contacta con nosotros</h1>
                         <form method="post" action="{{route('contactanos.store')}}">
                             @csrf
-                            <div class="col-lg-12 marg-top15px" style="float: left">
+                            <div class="col-lg-12 col-md-12 col-sm-12 marg-top15px" style="">
                                 <!-- Nombre -->
-                                <div class="col-lg-6 col-12" style="float: left">
+                                <div class="col-lg-6 col-12 col-md-12 " style="float: left">
                                     <h3 class="">Su nombre *</h3>
                                     @if(Auth::user())
                                         <input name="nombre" class="col-lg-10 col-12" type="text" value="{{Auth::user()->name}}" readonly>
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
 
-                            <button class="btn btn-primary col-lg-6 marg-top15px" type="submit">Enviar</button>
+                            <button class="btn btn-primary col-lg-6 col-12 marg-top15px" type="submit">Enviar</button>
                         </form>
                     </div>
                     <div class="col-lg-4">

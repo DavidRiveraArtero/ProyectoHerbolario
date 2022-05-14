@@ -1,5 +1,5 @@
 *{
-
+    font-family: Arial,sans-serif;
 }
 body{
     font-size: 15px;
@@ -22,17 +22,35 @@ a{
     background: #7ab6f1;
 }
 
+#direccion_p_con_negrita{
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
 
-  @keyframes ripple{
-    0%{
-      transform: scale(0.8);
-    }
+#direccion_p_sin_negrita{
+    text-align: left;
+    font-size: 18px;
+    margin-bottom: 10px;
 
-    50%{
-      transform: scale(1.2);
-    }
+}
 
-    100%{
-      transform: scale(0.8);
-    }
-  }
+
+
+
+
+@keyframes ripple{
+0%{
+  transform: scale(0.8);
+}
+
+50%{
+  transform: scale(1.2);
+}
+
+100%{
+  transform: scale(0.8);
+}
+}

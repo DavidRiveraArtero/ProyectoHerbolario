@@ -46,12 +46,19 @@ class comandaController extends Controller
         $precio = 0;
         $listaP = lista_producto::all()->where('id_usuario','=',Auth::user()->id);
         $listaP = $listaP->where('finalizado','=',0);
-
         if(count($listaP)>0) {
+            $stocks = [];
+
 
             foreach ($listaP as $lista) {
                 $producto = Producto::all()->where('id', '=', $lista->id_producto)->first();
                 $precio += $producto->precio;
+                array_push($stocks, Producto::all()->where('id','=',$lista->id_producto)->first());
+            }
+            foreach ($stocks as $stock){
+                if ($stock->cantidad <= 0){
+                    return Redirect::back()->with('success','Lo sentimos pero uno de nuestros productos no tiene stock no podemos seguir con la compra');
+                }
             }
             comanda::create([
                 'id_direccion'=>$request->id_direccion,

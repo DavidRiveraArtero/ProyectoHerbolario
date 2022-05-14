@@ -97,8 +97,6 @@ class ProductoController extends Controller
                 "fotoProducto" => $fotoProducto,
                 "comentarios" => $cometario,
                 'usuarios'=> User::all()
-
-
             ]);
         }
     }

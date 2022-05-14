@@ -486,7 +486,7 @@ table.table_comanda{
 
 #contenedor_direccion{
     border: 1px solid black;
-    border-radius: 30px;
+    border-radius: 13px;
     background-color: white;
 }
 
@@ -628,5 +628,10 @@ table.table_comanda{
         background-position: -300px 200px ;
     }
 
-
+    #avatar{
+        display: none;
+    }
+    #nombre_user{
+        display: none;
+    }
 }

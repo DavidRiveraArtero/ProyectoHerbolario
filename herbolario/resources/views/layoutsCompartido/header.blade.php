@@ -17,7 +17,7 @@
             <div class="dropdown" id="">
                 @foreach($FotoUsuario as $avatar)
                     @if($avatar->activo == "1")
-                        <div  style="height: 40px; float: left;width: 40px">
+                        <div  style="height: 40px; float: left;width: 40px" id="avatar">
                             <img src="{{asset("storage/". $avatar->file_path)}}" style="border-radius: 50%; height: 100%">
                         </div>
                     @endif
