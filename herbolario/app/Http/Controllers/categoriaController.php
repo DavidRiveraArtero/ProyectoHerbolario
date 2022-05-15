@@ -53,6 +53,10 @@ class categoriaController extends Controller
     public function index()
     {
 
+        return view('admin.categoria.indexCategoria',[
+            "categorias"=>categoria_producto::paginate(10),
+            "nameProducto"=>Producto::all(),
+        ]);
     }
 
     /**
@@ -62,7 +66,10 @@ class categoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categoria.createCategoria',[
+            'productos'=>Producto::all(),
+        ]);
+
     }
 
     /**
@@ -73,7 +80,26 @@ class categoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "categorias"=>'required',
+            "productos"=>'required',
+        ]);
+        $todasCategorias= categoria_producto::all()->where('categoria','=',$request->categorias);
+
+        foreach ($todasCategorias as $categoria){
+            if($categoria->id_producto == $request->productos){
+                return redirect()->route('adminCategoria.index')->with('success','Lo sentimos este producto ya tiene esa categoria');
+            }
+        }
+
+
+        categoria_producto::create([
+            'categoria'=>$request->categorias,
+            'id_producto'=>$request->productos
+        ]);
+
+        return redirect()->route('adminCategoria.index')->with('success','Categoria Creada');
+
     }
 
     /**
@@ -84,7 +110,7 @@ class categoriaController extends Controller
      */
     public function show(categoria_producto $categoria_producto)
     {
-        //
+
     }
 
     /**
@@ -93,9 +119,15 @@ class categoriaController extends Controller
      * @param  \App\Models\categoria_producto  $categoria_producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(categoria_producto $categoria_producto)
+    public function edit(categoria_producto $categoria_producto,$id)
     {
-        //
+        $categoriaSelect = categoria_producto::all()->where('id','=',$id)->first();
+        $producSelect = Producto::all()->where('id','=',$categoriaSelect->id_producto)->first();
+
+        return view('admin.categoria.updateCategoria',[
+            'categoriaSelect'=>$categoriaSelect,
+            'productSelect'=>$producSelect,
+        ]);
     }
 
     /**
@@ -105,9 +137,23 @@ class categoriaController extends Controller
      * @param  \App\Models\categoria_producto  $categoria_producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, categoria_producto $categoria_producto)
+    public function update(Request $request, categoria_producto $categoria_producto,$id)
     {
-        //
+
+        $categoria_producto = categoria_producto::all()->where('id','?',$id)->first();
+        $request->validate([
+            'categorias'=>'required'
+        ]);
+
+        $ok = $categoria_producto->updateOrFail([
+            'categoria'=>$request->categorias
+        ]);
+
+        if($ok){
+            return redirect()->route('adminCategoria.index')->with('success','Se cambio la categoria del producto correctamente');
+        }else{
+            return redirect()->route('adminCategoria.index')->with('success','Error');
+        }
     }
 
     /**
@@ -116,8 +162,10 @@ class categoriaController extends Controller
      * @param  \App\Models\categoria_producto  $categoria_producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(categoria_producto $categoria_producto)
+    public function destroy(categoria_producto $categoria_producto, $id)
     {
-        //
+        $categoria = categoria_producto::all()->where('id','=',$id)->first();
+        $categoria->delete();
+        return Redirect::back()->with('success','Producto quitado de la categoria');
     }
 }

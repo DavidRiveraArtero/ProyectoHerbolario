@@ -76,6 +76,8 @@ Route::get('/paypal/status',[comandaController::class,'payPalStatus']);
 // Quienes somos
 Route::get('/quienes_somos',[quienesSomosController::class , 'index'])->name('quienes_somos');
 
+Route::resource('adminCategoria',categoriaController::class);
+
 
 // LOGIN
 Route::get('/login',function (){

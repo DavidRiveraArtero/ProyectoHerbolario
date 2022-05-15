@@ -12,6 +12,8 @@
                     <a class="sub-item" href="{{route('productos.create')}}">Crear Productos</a>
                     <a class="sub-item" href="{{route('usuarios.index')}}">Listar Usuarios</a>
                     <a class="sub-item" href="{{route('usuarios.create')}}">Crear Usuarios</a>
+                    <a class="sub-item" href="{{route('adminCategoria.index')}}">Lista Categoria</a>
+                    <a class="sub-item" href="{{route('adminCategoria.create')}}">Crear Categoria</a>
                 </div>
             </div>
 
