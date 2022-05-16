@@ -8,6 +8,7 @@
         </div>
     </div>
     <div class="container">
+        @if(count($comandas)>0)
         <div class="row">
                 @php($cont2 = 0)
                 @foreach($comandas as $key => $comanda)
@@ -41,7 +42,7 @@
                                 <div style="float: left">
                                     <h3 style=" margin-left: 20px;margin-bottom: 45px">{{$productos[$cont]->nombre}}</h3>
                                     <h3 style=" margin-left: 20px;margin-bottom: 45px">Precio: {{$productos[$cont]->precio}}$</h3>
-                                    <a class="btn btn-success" style="margin-left: 20px">Deje su Opinion del producto</a>
+                                    <a href="{{route('home.show',$productos[$cont])}}" class="btn btn-success" style="margin-left: 20px">Deje su Opinion del producto</a>
 
                                 </div>
                                 <div style="float: left;">
@@ -54,5 +55,14 @@
                     </div>
                 @endforeach
         </div>
+        @else
+            <div class="col-lg-6" style="background-color: white; border: 1px solid black">
+
+                <p style="font-size: 40px">No compraste ningun producto</p>
+
+                <p style="font-size: 20px; width: 70%">Puedes rellenar tu cesta con los productos que te ofrecemos. Seguro que encuentras algo interesante.</p>
+
+            </div>
+        @endif
     </div>
 @endsection
