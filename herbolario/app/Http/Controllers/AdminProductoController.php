@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\FotosProducto;
+use App\Models\categoria_producto;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
@@ -197,6 +198,14 @@ class AdminProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $categorias = categoria_producto::all()->where('id_producto','=',$producto->id);
+
+        if(count($categorias)>0){
+            foreach ($categorias as $categoria){
+                $categoria->delete();
+            }
+        }
+
         $storageDisk = FotosProducto::where('id_product',$producto->id)->get();
 
         Storage::disk('public')->delete($storageDisk[0]->file_path);
