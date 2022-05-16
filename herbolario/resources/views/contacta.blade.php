@@ -1,7 +1,7 @@
 @extends('layoutsCompartido.body')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-
+{!! RecaptchaV3::initJs() !!}
 
 @section('content')
     <div class="col-lg-12" style="margin-bottom: 15px;margin-top:50px; background-color: #9BD682; border-top:1px solid black; height: 80px" >
@@ -51,6 +51,18 @@
                                 <div class="col-lg-12 col-12" style="float: left">
                                     <h3 class="">Mensaje *</h3>
                                     <textarea name="mensaje" class="col-lg-11 col-12" type="text" rows="4"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                <div class="col-md-6">
+                                    {!! RecaptchaV3::field('register') !!}
+                                    @if ($errors->has('g-recaptcha-response'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
 

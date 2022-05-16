@@ -31,6 +31,7 @@ class ContactaController extends Controller
             'mensaje'=> $request->mensaje,
             'nombre'=> $request->nombre,
             'email'=> $request->email,
+            'g-recaptcha-response' => 'required|recaptchav3:register,0.5'
         ];
         \Mail::to('dariar@fp.insjoaquimmir.cat')->send(new SendMail($details));
 
