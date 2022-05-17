@@ -26,12 +26,16 @@ class ContactaController extends Controller
 
     // SEND EMAIL
     public function store(Request $request){
+        $request->validate([
+            'g-recaptcha-response' => 'required|recaptchav3:register,0.5',
+            'asunto'=>'required',
+            'mensaje'=>'required'
+        ]);
         $details = [
             'asunto'=> $request->asunto,
             'mensaje'=> $request->mensaje,
             'nombre'=> $request->nombre,
             'email'=> $request->email,
-            'g-recaptcha-response' => 'required|recaptchav3:register,0.5'
         ];
         \Mail::to('dariar@fp.insjoaquimmir.cat')->send(new SendMail($details));
 

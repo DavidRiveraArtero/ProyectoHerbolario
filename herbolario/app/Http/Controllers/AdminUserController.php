@@ -33,7 +33,8 @@ class AdminUserController extends Controller
     {
         $roles = (Roles_usuario::all());
         return view('admin.users.create',[
-            "rolesUsuario"=>$roles
+            "rolesUsuario"=>$roles,
+
         ]);
     }
 

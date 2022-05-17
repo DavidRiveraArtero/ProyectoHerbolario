@@ -30,6 +30,7 @@
                                     @endif
                                 </div>
 
+
                                 <!-- EMAIL -->
                                 <div class="col-lg-6 col-12" style="float: left">
                                     <h3>Email *</h3>
@@ -44,13 +45,18 @@
                             <div class="col-lg-12 col-12 marg-top45px" style="float: left">
                                 <div class="col-lg-12 col-12" style="float: left">
                                     <h3 class="">Asunto *</h3>
-                                    <input name="asunto" class="col-lg-11 col-12" type="text">
+                                    <input name="asunto" class="col-12  @error('asunto') is-invalid @enderror form-control" style="width: 91.66666667%;" type="text">
                                 </div>
                             </div>
+                            @error('asunto')
+                                <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                             <div class="col-lg-12 col-12 marg-top45px" style="float: left">
                                 <div class="col-lg-12 col-12" style="float: left">
                                     <h3 class="">Mensaje *</h3>
-                                    <textarea name="mensaje" class="col-lg-11 col-12" type="text" rows="4"></textarea>
+                                    <textarea name="mensaje" class="col-lg-11 col-12 @error('mensaje') is-invalid @enderror form-control" type="text" rows="4"  style="width: 91.66666667%;"></textarea>
                                 </div>
                             </div>
 

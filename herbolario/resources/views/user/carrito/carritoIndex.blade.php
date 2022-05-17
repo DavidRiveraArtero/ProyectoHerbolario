@@ -81,7 +81,7 @@
 
                     <p style="font-size: 40px">Tu cesta está vaciá</p>
 
-                    <p style="font-size: 20px; width: 70%">Puedes rellenar tu cesta con los productos que te ofrecemos. Seguro que encuentras algo interesante.</p>
+                    <p style="font-size: 20px; width: 70%">Puedes rellenar tu cesta con los productos que te ofrecemos. Seguro que encuentras algo interesante. <a href="{{route("home.index")}}">Comprar</a></p>
 
                 </div>
             @endif

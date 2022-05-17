@@ -70,29 +70,4 @@
         </div>
     </div>
 
-
 </body>
-<!--
-<table class="tareas">
-    <tr>
-        <td>Id</td>
-        <td>Nombre</td>
-        <td>Precio</td>
-        <td>Descripcion</td>
-        <td>Opciones</td>
-    </tr>
-    @foreach($productos as $producto)
-        <tr>
-            <td>{{$producto->id}}</td>
-            <td>{{$producto->nombre}}</td>
-            <td>{{$producto->precio}}</td>
-            <td>{{$producto->descripcion}}</td>
-            <td>1</td>
-        </tr>
-    @endforeach
-    <div class="justify-content-center">
-        {{ $productos->links()}}
-    </div>
-</table>
-</div>
-    -->
