@@ -71,6 +71,7 @@ header{
 }
 /* La caja de cada producto  */
 .productos{
+
     font-size: 18px;
     margin-left: 125px;
     float: left;
@@ -510,6 +511,8 @@ table.table_comanda{
     }
 
     .productos{
+        transition: 0.3s ease;
+
         width: 33.33%;
     }
 
@@ -528,6 +531,7 @@ table.table_comanda{
         margin-bottom: 40px;
         margin-left: 3%;
         height: auto;
+        transition: 0.3s ease;
     }
 
     #drop-area{
@@ -547,15 +551,18 @@ table.table_comanda{
         margin-bottom: 40px;
         margin-left: 3%;
         height: auto;
+        transition: 0.3s ease;
     }
     #nav-container{
         display: none;
+        transition: 0.3s ease;
     }
     #prenav{
+        transition: 0.3s ease;
         display: block!important;
     }
     #responsive-nav{
-
+        transition: 0.3s ease;
         margin-bottom: 20px;
         height: 350px;
         width: 100%;
@@ -563,7 +570,7 @@ table.table_comanda{
     }
 
     #wrapper ul{
-
+        transition: 0.3s ease;
         width: 100%;
         margin: 0% auto;
         height: 100%;
@@ -571,6 +578,7 @@ table.table_comanda{
     }
 
     #wrapper li{
+        transition: 0.3s ease;
         margin: 0% auto;
         left: 0;
         width: 100%;
@@ -592,19 +600,18 @@ table.table_comanda{
 
 
 @media (max-width: 558px) {
-    .productos{
 
-    }
     #responsive-nav{
-
+        transition: 0.3s ease;
         margin-bottom: 20px;
         height: 350px;
         width: 100%;
         padding-top: 20px;
+
     }
 
     #wrapper ul{
-
+        transition: 0.3s ease;
         width: 100%;
         margin: 0% auto;
         height: 100%;
@@ -612,6 +619,7 @@ table.table_comanda{
     }
 
     #wrapper li{
+        transition: 0.3s ease;
         margin: 0% auto;
         left: 0;
         width: 100%;
@@ -619,6 +627,7 @@ table.table_comanda{
         transition: all ease-in-out .2s;
     }
     #drop-area{
+        transition: 0.3s ease;
         margin-left: 0;
     }
     .col-12{
@@ -634,4 +643,5 @@ table.table_comanda{
     #nombre_user{
         display: none;
     }
+
 }

@@ -1,12 +1,13 @@
 @include('layoutsCompartido.head')
 <body>
     <header style="margin-bottom: 40px" >
+        @include('layoutsCompartido.adminNavegacion')
         <div class="txt-centrado marg-top15px">
             <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Editar productos</span>
             <h3 style="font-weight: bold;">Editar Producto</h3>
         </div>
     </header>
-    @include('layoutsCompartido.adminNavegacion')
+
 
     <div id="contenedor_create" class="container">
 

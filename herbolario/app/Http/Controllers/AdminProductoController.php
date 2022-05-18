@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use App\Models\FotosProducto;
 use App\Models\categoria_producto;
+use App\Models\comentario;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
@@ -199,6 +200,14 @@ class AdminProductoController extends Controller
     public function destroy(Producto $producto)
     {
         $categorias = categoria_producto::all()->where('id_producto','=',$producto->id);
+
+        $comentarios = comentario::all()->where('id_producto','=',$producto->id);
+
+        if(count($comentarios)>0){
+            foreach ($comentarios as $comentario){
+                $comentario->delete();
+            }
+        }
 
         if(count($categorias)>0){
             foreach ($categorias as $categoria){

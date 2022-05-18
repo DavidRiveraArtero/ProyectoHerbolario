@@ -14,6 +14,7 @@ use App\Http\Controllers\comandaController;
 use App\Http\Controllers\misPedidosController;
 use App\Http\Controllers\categoriaController;
 use App\Http\Controllers\quienesSomosController;
+use App\Http\Controllers\AdminComandaController;
 use Illuminate\Http\Request;
 use App\Models\Avatar_usuarios;
 /*
@@ -77,6 +78,11 @@ Route::get('/paypal/status',[comandaController::class,'payPalStatus']);
 Route::get('/quienes_somos',[quienesSomosController::class , 'index'])->name('quienes_somos');
 
 Route::resource('adminCategoria',categoriaController::class);
+
+// Admin Comanda
+Route::resource('adminComanda', AdminComandaController::class);
+
+Route::post('filtrarComanda', [AdminComandaController::class, 'filtrarComanda'])->name('filtrar_comanda');
 
 
 // LOGIN
