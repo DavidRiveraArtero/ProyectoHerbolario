@@ -2,6 +2,8 @@
 <body>
 
 <header style="margin-bottom: 40px" >
+    @include('layoutsCompartido.adminNavegacion')
+
     <div class="txt-centrado marg-top15px">
         <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Productos</span>
         <h3 style="font-weight: bold;">Lista Usuario</h3>
@@ -18,7 +20,6 @@
 
 
     <!-- ESTO VA AQUI -->
-    @include('layoutsCompartido.adminNavegacion')
 
 
     <a href="{{route('usuarios.create')}}" class="btn btn-primary" style="float: right;margin-right: 50px">Crear Usuario</a>

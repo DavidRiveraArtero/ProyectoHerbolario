@@ -2,10 +2,10 @@
 <body>
 
 <header style="margin-bottom: 40px" >
-
+    @include('layoutsCompartido.adminNavegacion')
     <div class="txt-centrado marg-top15px">
 
-        @include('layoutsCompartido.adminNavegacion')
+
 
         <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Comanda</span>
 

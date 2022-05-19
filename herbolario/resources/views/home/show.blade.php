@@ -80,9 +80,9 @@
                         {{ session()->get('success') }}
                     </div>
                 @endif
-                <h3>Nombre Producto: <span>{{$producto->nombre}}</span></h3>
-                <h3>Precio: <span>{{$producto->precio}}$</span></h3>
-                <h3>Unidades: <span>{{$producto->cantidad}}</span></h3>
+                <h3 style="margin-bottom: 30px">Producto: <span>{{$producto->nombre}}</span></h3>
+                <h3 style="margin-bottom: 30px">Precio: <span>{{$producto->precio}}$</span></h3>
+                <h3 style="margin-bottom: 30px">Unidades: <span>{{$producto->cantidad}}</span></h3>
                 <form method="post" action="{{route('carrito.store')}}">
                     @csrf
                     @method('post')

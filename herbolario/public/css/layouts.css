@@ -40,9 +40,9 @@ header{
 
 /* Hover del menu del usuario para que salga su contenido */
 .dropdown:hover .dropdown-menu {
-
     display: block;
     margin-top: 0;
+
 }
 
 .dropdown-item1:hover .sub-menu{
@@ -223,10 +223,11 @@ table.tareas{
 
 .contenedor_dropdown{
     width: 290px;
-    height: 87vh;
+    height: 100vh;
     top:0;
     left: 0;
     overflow-y: auto;
+    transition: 1s ease;
 }
 
 .contenedor_dropdown .menu{
@@ -251,14 +252,14 @@ table.tareas{
 
 .contenedor_dropdown .menu .item a:hover{
     background-color: #8621F8;
-    transition: 0.3s ease;
+    transition: 1.2s ease;
 }
 
 .contenedor_dropdown .menu .item a .dropdown{
     position: absolute;
     right: 0;
     margin: 20px;
-    transition: 0.3s ease;
+    transition: 1s ease;
 }
 .contenedor_dropdown .menu .item .sub-menu{
     background: rgba(255, 255, 255, 0.1);
@@ -467,22 +468,28 @@ table.table_comanda{
 #persona1 {
     border-radius: 50%;
     height: 30vh;
+    /*
     background-image: url("../img/animales-felices-portada-1280x720x80xX.jpg");
     background-position: 50px 100px;
     background-size: 1000px;
     background-attachment: fixed;
     background-repeat: no-repeat;
+
+     */
 }
 
 #persona2{
 
     border-radius: 50%;
     height: 30vh;
+    /*
     background-image: url("../img/ghost_5965d71c_800x600.jpg");
     background-position: 800px 0px ;
     background-size: 1000px;
     background-attachment: fixed;
     background-repeat: no-repeat;
+
+     */
 }
 
 #contenedor_direccion{

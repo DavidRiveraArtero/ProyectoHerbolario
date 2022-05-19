@@ -32,8 +32,8 @@
     </nav>
 
 
-    <div class="collapse " id="header" >
-        <div class="bg-white p-4 contenedor_dropdown" >
+    <div class="collapse " id="header" style="">
+        <div class="bg-white p-4 contenedor_dropdown"  >
             <div class="menu" style="margin-top: 0">
                 @if(Auth::user())
                     <div class="item">
@@ -58,14 +58,14 @@
                         </div>
                     </div>
                     @else
+                    <hr>
                     <div class="item"><a class="" href="{{route("login")}}">Iniciar Sesion<i class="fas fa-angle-right dropdown"></i></a></div>
                     <div class="item"><a class="" href="{{route("register")}}">Registro<i class="fas fa-angle-right dropdown"></i></a></div>
                 @endif
-
+                    <hr>
                 <div class="item"><a class="" href="{{route('contactanos.index')}}">Contacto<i class="fas fa-angle-right dropdown"></i></a></div>
+                    <hr>
                 <div class="item"><a class="" href="{{route('quienes_somos')}}">Quienes somos<i class="fas fa-angle-right dropdown"></i></a></div>
-
-
             </div>
         </div>
     </div>

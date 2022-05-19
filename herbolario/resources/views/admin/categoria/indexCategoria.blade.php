@@ -1,8 +1,8 @@
 @include('layoutsCompartido.head')
 <body>
-
     <header style="margin-bottom: 40px" >
         @include('layoutsCompartido.adminNavegacion')
+
         <div class="txt-centrado marg-top15px">
             <a href="{{route('home.index')}}"><span style="font-weight: bold;">Inicio</span></a><span style="font-weight: bold;"> / Categorias</span>
             <h3 style="font-weight: bold;">Lista Categoria</h3>
@@ -14,10 +14,6 @@
         </div>
     @endif
     <div class="contenedor_tablas">
-
-
-
-
 
 
         <a href="{{route('adminCategoria.create')}}" class="btn btn-primary" style="float: right;margin-right: 50px">Crear Producto</a>

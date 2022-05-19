@@ -38,19 +38,21 @@
                 </div>
                 <div class="row" style="margin-top: 150px">
                     <!-- CONTENEDOR FANTASMA -->
-                    <div class="col-lg-2 col-12" ></div>
+                    <div class="col-lg-2 col-1"></div>
 
-                    <div class="col-lg-2 col-12" id="persona1">
-                        <h1 style="margin-top: 300px">Usuario 1</h1>
+                    <div class="col-lg-2 col-5" id="persona1" style="float: left">
+                        <img src="{{asset("img/1.jpg")}}" style="width: 100%; height: 100%; border-radius: 50%">
+                        <h1 style="">Usuario 1</h1>
                     </div>
 
 
                     <!-- CONTENEDOR FANTASMA -->
-                    <div class="col-lg-4 col-12" ></div>
+                    <div class="col-lg-4 col-1" style="float: left"></div>
 
 
-                    <div class="col-lg-2 col-12" id="persona2">
-                        <h1 style="margin-top: 300px">Usuario 2</h1>
+                    <div class="col-lg-2 col-5" id="persona2" style="float: left">
+                        <img src="{{asset("img/1.jpg")}}" style="width: 100%; height: 100%; border-radius: 50%">
+                        <h1 style="">Usuario 2</h1>
                     </div>
                 </div>
             </div>

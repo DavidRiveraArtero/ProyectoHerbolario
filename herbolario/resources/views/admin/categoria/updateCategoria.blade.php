@@ -1,6 +1,5 @@
 @include('layoutsCompartido.head')
 <body>
-
 <header style="margin-bottom: 40px" >
     @include('layoutsCompartido.adminNavegacion')
     <div class="txt-centrado marg-top15px">

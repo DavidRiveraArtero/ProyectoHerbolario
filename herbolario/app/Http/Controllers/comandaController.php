@@ -162,7 +162,7 @@ class comandaController extends Controller
             ];
             \Mail::to('dariar@fp.insjoaquimmir.cat')->send(new AdminProductosCompradoMail($details));
             $status = "Gracias. El pago a traves de PayPal se ha realizado correctamente.";
-            return Redirect::back()->with('success', $status);
+            return redirect()->route('carrito.index')->with('success',$status);
 
 
         }else{
@@ -171,7 +171,7 @@ class comandaController extends Controller
 
             $comanda->delete();
             $status = "Lo sentimos. El pago a traves de PayPal no se pudo realizar.";
-            return Redirect::back()->with('success', $status);
+            return redirect()->route('carrito.index')->with('success',$status);
         }
 
 

@@ -2,21 +2,42 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-filter-left btm dropdown-toggle" style="float: left" id="dropdownList" data-bs-toggle="dropdown" aria-expanded="false" viewBox="0 0 16 16">
         <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
     </svg>
-    <div class="dropdown-menu float-start contenedor_dropdown" aria-labelledby="dropdownList" >
-        <div class="menu">
+    <div class="dropdown-menu float-start contenedor_dropdown" aria-labelledby="dropdownList">
+        <div class="menu" >
 
             <div class="item">
-                <a class="" href="">Admin<i class="fas fa-angle-right dropdown"></i></a>
+                <a class="" href="">Productos<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
                     <a class="sub-item" href="{{route('productos.index')}}">Listar Productos</a>
                     <a class="sub-item" href="{{route('productos.create')}}">Crear Productos</a>
+                </div>
+            </div>
+            <hr>
+            <div class="item">
+                <a class="" href="">Usuarios<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
                     <a class="sub-item" href="{{route('usuarios.index')}}">Listar Usuarios</a>
                     <a class="sub-item" href="{{route('usuarios.create')}}">Crear Usuarios</a>
-                    <a class="sub-item" href="{{route('adminCategoria.index')}}">Lista Categoria</a>
-                    <a class="sub-item" href="{{route('adminCategoria.create')}}">Crear Categoria</a>
+                </div>
+            </div>
+            <hr>
+
+            <div class="item">
+                <a class="" href="">Categorias<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a class="sub-item" href="{{route('adminCategoria.index')}}">Listar Categorias</a>
+                    <a class="sub-item" href="{{route('adminCategoria.create')}}">Crear Categorias</a>
+                </div>
+            </div>
+            <hr>
+            <div class="item">
+                <a class="" href="">Comanda<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
                     <a class="sub-item" href="{{route('adminComanda.index')}}">Lista Comandas</a>
                 </div>
             </div>
+
+            <hr>
 
             <div class="item">
                 <a class="" href="">Home<i class="fas fa-angle-right dropdown"></i></a>
