@@ -1,8 +1,8 @@
 @extends('layoutsCompartido.body')
 @section('content')
-    <div class="pos-f-t" style="margin-top: 60px" id='contenedor-nav'>
+    <div class="pos-f-t" style="margin-top: 56px" id='contenedor-nav'>
         <!-- BOTON RESPONSIVE -->
-          <nav class="navbar navbar-dark bg-dark" style="display:none;" id='prenav'>
+          <nav class="navbar navbar-dark bg-dark" style="display:none;padding-top: 5px!important;" id='prenav'>
             <div class="container-fluid">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -46,6 +46,7 @@
         <div class="contenedor_productos row">
 
             @foreach($productos as $producto)
+                @if($producto->estado == 1)
                 <div class="productos col-lg-2 col-12">
                     <div class="imagen_producto ">
                         @foreach($FotosProducto as $foto)
@@ -65,7 +66,7 @@
                         <a href="{{route('home.show', $producto,$producto->id)}}" class="btn btn-success">Info</a>
                     </div>
                 </div>
-
+                @endif
             @endforeach
         </div>
     </div>

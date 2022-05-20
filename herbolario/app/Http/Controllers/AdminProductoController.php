@@ -57,6 +57,7 @@ class AdminProductoController extends Controller
             'precio' => $request->precio,
             'cantidad'=> $request->cantidad,
             'descripcion' => $request->descripcion,
+            'estado'=>1
         ]);
 
 
@@ -199,6 +200,19 @@ class AdminProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+
+        if($producto->estado == 1){
+            $producto->updateOrFail([
+                'estado' => 0
+            ]);
+        }else{
+            $producto->updateOrFail([
+                'estado'=> 1
+            ]);
+        }
+        return redirect()->route('productos.index')->with('success', 'Estado cambiado');
+
+        /*
         $categorias = categoria_producto::all()->where('id_producto','=',$producto->id);
 
         $comentarios = comentario::all()->where('id_producto','=',$producto->id);
@@ -224,6 +238,7 @@ class AdminProductoController extends Controller
         $producto->delete();
 
         return redirect()->route('productos.index')->with('success', 'Producto eliminado');
+        */
     }
 
 

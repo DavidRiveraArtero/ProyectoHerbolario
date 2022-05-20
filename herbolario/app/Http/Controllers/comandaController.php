@@ -52,7 +52,7 @@ class comandaController extends Controller
 
             foreach ($listaP as $lista) {
                 $producto = Producto::all()->where('id', '=', $lista->id_producto)->first();
-                $precio += $producto->precio;
+                $precio += ($producto->precio * $lista->cantidad) * 1.21;
                 array_push($stocks, Producto::all()->where('id','=',$lista->id_producto)->first());
             }
             foreach ($stocks as $stock){
@@ -124,7 +124,7 @@ class comandaController extends Controller
 
             foreach ($listaP as $lista) {
                 $producto = Producto::all()->where('id', '=', $lista->id_producto)->first();
-                $precio += $producto->precio;
+                $precio += ($producto->precio * $lista->cantidad)  * 1.21;
                 $producto->updateOrFail([
                    'cantidad'=>$producto->cantidad - 1
                 ]);
@@ -173,8 +173,6 @@ class comandaController extends Controller
             $status = "Lo sentimos. El pago a traves de PayPal no se pudo realizar.";
             return redirect()->route('carrito.index')->with('success',$status);
         }
-
-
 
     }
 }

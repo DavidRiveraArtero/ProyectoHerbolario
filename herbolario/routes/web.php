@@ -84,6 +84,7 @@ Route::resource('adminComanda', AdminComandaController::class);
 
 Route::post('filtrarComanda', [AdminComandaController::class, 'filtrarComanda'])->name('filtrar_comanda');
 
+Route::post('cantidad_carrito',[carritoController::class , 'cantidProducto'])->name('carrit_ajax.store');
 
 // LOGIN
 Route::get('/login',function (){

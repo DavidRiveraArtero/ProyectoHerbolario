@@ -33,6 +33,7 @@
                     <td  scope="col">Nombre</td>
                     <td  scope="col">Precio</td>
                     <td  scope="col">Descripcion</td>
+                    <td scope="col">Estado</td>
                     <td  scope="col">Opciones</td>
                 </tr>
                 </thead>
@@ -43,6 +44,11 @@
                         <td>{{$producto->nombre}}</td>
                         <td>{{$producto->precio}}</td>
                         <td>{{$producto->descripcion}}</td>
+                        @if($producto->estado == 1)
+                            <td>Activo</td>
+                        @else
+                            <td>Inactivo</td>
+                        @endif
                         <td>
                             <a class="btn btn-info" href="{{route('productos.edit',$producto)}}" style="float: left">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

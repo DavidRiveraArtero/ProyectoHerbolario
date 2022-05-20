@@ -30,6 +30,7 @@
 
             @if(count($listaP)>0)
                 <div class="col-lg-6 col-12" style="height: auto">
+                @php($cont = 0)
                 @php($rep = "")
                     @foreach($producto as $key => $product)
 
@@ -41,7 +42,7 @@
 
                                 <p class="col-lg-6 col-5" style="float: left; margin-top: 15px; font-size: 20px; margin-left: 30px">{{$product->nombre}}</p>
 
-                                <p class="col-lg-6 col-5" style="float: left;font-size: 28px; margin-left: 30px">{{$product->precio}}€</p>
+                                <p  class="col-lg-6 col-5" style="float: left;font-size: 28px; margin-left: 30px"><span class="precio_{{$product->id}} precioO">{{$product->precio * 1.21}}</span>€ <span style="font-size:0.7em">(amb IVA)</span></p>
 
                                 @if($product->cantidad > 0)
                                     <p class="col-lg-6 col-5" style="float: left;margin-left: 30px; color: #00a600">En stock</p>
@@ -50,19 +51,23 @@
 
                                 @endif
                                 <label style="float: left;margin-left: 30px;">Cantidad: </label>
-                                <select class="col-lg-2" style="margin-bottom: 15px">
-                                    @php($cont = 0)
-                                    @foreach($listaP as $lista)
-                                        @if($lista->id_producto == $product->id)
-                                            @php($cont++)
-                                        @endif
-                                    @endforeach
-                                    <option>{{$cont}}</option>
-                                </select>
+
+
+
+
+                                <input class="col-lg-2 {{$product->id}} cantidad" style="margin-bottom: 15px"  type="text" value="{{$listaP[$cont]->cantidad}}" id="">
+
+
+
+                                <button value="{{$product->id }}" onclick="more(this)" class="up"> + </button>
+                                <button value="{{$product->id }}" class="down" onclick="less(this)"> - </button>
+
+                                @php($cont++)
+
                                 @foreach($listaP as $lista)
-
-                                <form method="post" action="{{route('carrito.destroy',$lista->id)}}">
-
+                                    @if($lista->id_producto == $product->id)
+                                        <form method="post" action="{{route('carrito.destroy',$lista->id)}}">
+                                    @endif
                                 @endforeach
                                     @csrf
                                     @method('delete')
@@ -98,7 +103,7 @@
                     @csrf
                     @method('post')
 
-                    <select class="col-lg-12" style="margin-bottom: 30px" name="id_direccion">
+                    <select name='id_direccion' class="col-lg-12" style="margin-bottom: 30px">
 
                         @foreach($direcciones as $direccion)
 
@@ -108,7 +113,7 @@
 
                     </select>
 
-                    <h4>Precio Total = {{$precioF}}$</h4>
+                    <h4>Precio Total = <span id="precioF">{{$precioF}}</span>$</h4>
 
                     <input readonly name="precio" type="hidden" value="{{$precioF}}">
 
@@ -122,4 +127,124 @@
 
         </div>
     </div>
+    <meta name="csrf-token" content="{{csrf_token()}}">
+
+    <script>
+        input = document.getElementsByClassName('cantidad')
+
+        precioF = document.getElementById('precioF')
+
+        precioO = document.getElementsByClassName('precioO')
+
+        cantidad = document.getElementsByClassName('cantidad')
+
+        precio = 0
+        // ACTUALIZAR PRECIO
+        for(x = 0; x<precioO.length;x++){
+            precio = precio + parseFloat(precioO[x].innerHTML) *  cantidad[x].value
+        }
+
+        console.log('precioF: ',precio);
+
+
+        precioF.innerHTML = precio
+
+
+        up = document.getElementsByClassName('up')
+
+
+        down = document.getElementsByClassName('down')
+
+
+        function actualitzarQuantitat(quantitat,valor) {
+            console.log("dentro de ajax:", valor)
+            $.ajax({
+                type:'post',
+                url:'{{route('carrit_ajax.store')}}',
+                data:{
+                    'id': idproducto,
+                    '_token': '{{csrf_token()}}',
+                    'quantitat': quantitat
+                }
+            }).done(function(resp){
+                console.log(resp)
+                valor.value = quantitat
+
+                if (resp.success) {
+                    // Actualitzar comptador producte
+
+                } else {
+
+                }
+            })
+        }
+
+        function more(id){
+           producto = id.value
+
+        }
+
+        function less(id){
+            producto = id.value
+
+        }
+
+
+        for(x = 0; x<up.length;x++){
+
+
+            up[x].addEventListener('click',event=>{
+                idproducto = producto
+
+                valor = event.target.parentNode.getElementsByClassName(idproducto)[0].value
+                precio = event.target.parentNode.getElementsByClassName("precio_"+idproducto)[0].innerHTML
+                inputV = event.target.parentNode.getElementsByClassName(idproducto)[0]
+
+                console.log("precio UP: ", precio)
+                console.log("Valor UP: ", valor)
+                precioF.innerText = parseFloat(precio) + parseFloat(precioF.innerHTML)
+                console.log("UP ACTUALIZAR PRECIO Final", precioF.innerHTML)
+                actualitzarQuantitat(parseInt(valor)+1,inputV)
+
+
+            })
+        }
+
+        for(x = 0; x<down.length;x++){
+            down[x].addEventListener('click',event =>{
+                idproducto = producto
+
+                valor = event.target.parentNode.getElementsByClassName(idproducto)[0].value
+                precio = event.target.parentNode.getElementsByClassName("precio_"+idproducto)[0].innerHTML
+                inputV = event.target.parentNode.getElementsByClassName(idproducto)[0]
+                console.log("precio DOWN: ", precio)
+                console.log("Valor DOWN: ", valor)
+                precioF.innerText =  parseFloat(precioF.innerHTML) - parseFloat(precio)
+                actualitzarQuantitat(valor-1,inputV)
+
+            })
+        }
+
+
+
+
+        for(x = 0; x<input.length;x++){
+            input[x].addEventListener('change',event=>{
+                idproducto = event.target.parentNode.getElementsByClassName("up")[0].value
+                precio = event.target.parentNode.getElementsByClassName("precio_"+idproducto)[0].innerHTML
+                valor = event.target.parentNode.getElementsByClassName(idproducto)[0].value
+
+                console.log("input:" ,valor)
+                precio = 0
+                for(x = 0; x<precioO.length;x++){
+                    precio = precio + parseFloat(precioO[x].innerHTML) *  cantidad[x].value
+                }
+                precioF.innerHTML = precio
+                actualitzarQuantitat(parseInt(valor))
+
+            })
+        }
+
+    </script>
+
 @endsection

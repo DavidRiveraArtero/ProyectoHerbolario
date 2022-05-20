@@ -56,7 +56,9 @@
                 <tr class="table-success">
                     <td  scope="col">Id Comanda</td>
                     <td  scope="col">Cantidad producto</td>
-                    <td  scope="col">Importe</td>
+                    <td  scope="col">Importe con IVA</td>
+                    <td  scope="col">Importe sin IVA</td>
+                    <td scope="col">Fecha</td>
                 </tr>
 
             </thead>
@@ -71,6 +73,8 @@
                         <th scope="row">{{$comanda->id}}</th>
                         <th scope="row">{{$cantidades[$cont]}}</th>
                         <td>{{$comanda->precio_final}}€</td>
+                        <td>{{$comanda->precio_final - (float)$comanda->precio_final*(21/100)}}€</td>
+                        <td>{{$comanda->created_at}}</td>
                     </tr>
 
                     @php($cont++)
@@ -80,14 +84,20 @@
             </tbody>
 
         </table>
-        <table class="table table-bordered 1" style="float: right; width: 22%!important;">
+        <table class="table table-bordered 1" style="float: right; width: 22%!important; text-align: center">
             <tr class="table-success">
-                <td>Total</td>
+                <td>Precio con IVA</td>
+                <td>Precio sin IVA</td>
+                <td>IVA</td>
             </tr>
             <tr>
-                <th>{{$precioTotal}}€</th>
+                <th>{{$precioTotal }}€</th>
+                <th>{{$precioTotal - (float)$precioTotal*21/100}}€</th>
+                <th>+{{(float)$precioTotal*21/100}}€</th>
             </tr>
         </table>
+
+
 
         {{-- Pagination --}}
         <div class="d-flex justify-content-center mylinks">

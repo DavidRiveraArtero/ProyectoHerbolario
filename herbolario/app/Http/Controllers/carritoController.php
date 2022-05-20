@@ -34,7 +34,7 @@ class carritoController extends Controller
 
         foreach ($listaP as $lista){
             $producto = Producto::all()->where('id','=',$lista->id_producto)->first();
-            $precio+=$producto->precio;
+            $precio+=$producto->precio * 1.21;
             array_push($FotoProducto,FotosProducto::all()->where('id_product','=',$lista->id_producto)->first());
             array_push($Productos,Producto::all()->where('id','=',$lista->id_producto)->first());
         }
@@ -71,21 +71,61 @@ class carritoController extends Controller
     public function store(Request $request)
     {
         $store = Producto::all()->where('id','=',$request->id)->first();
-        if($store->cantidad != 0){
-            $ok = lista_producto::create([
-                'id_usuario'=>Auth::user()->id,
-                'id_producto'=>$request->id,
-                'finalizado'=>false
-            ]);
 
-            if($ok){
-                return Redirect::back()->with('success','Elemento agregado al carrito');
+        $listaProduct = lista_producto::all()->where('id_producto','=',$request->id);
+
+        if($store->cantidad != 0){
+
+
+            foreach ($listaProduct as $lista) {
+
+                if ($lista->id_producto == $request->id) {
+
+                    $cantidad = $lista->cantidad + 1;
+
+                    $ok = $lista->updateOrFail([
+
+                        'cantidad' => $cantidad
+
+                    ]);
+                    return Redirect::back()->with('success', 'Elemento agregado al carrito');
+                } else {
+                    $ok = lista_producto::create([
+                        'id_usuario' => Auth::user()->id,
+                        'id_producto' => $request->id,
+                        'finalizado' => false,
+                        'cantidad' => 1
+                    ]);
+
+                }
             }
-        }else{
-            return Redirect::back()->with('success','Lo sentimos no tenemos stock');
+
+
+            if(count($listaProduct) == 0){
+                $ok = lista_producto::create([
+                    'id_usuario'=>Auth::user()->id,
+                    'id_producto'=>$request->id,
+                    'finalizado'=>false,
+                    'cantidad'=> 1
+                ]);
+            }
+
+
+
+            return Redirect::back()->with('success', 'Elemento agregado al carrito');
+
+
+
         }
 
-
+        if ($request->ajax()) {
+              return [
+                    "success" => false,
+                    "message" => "Lo sentimos no tenemos stock"
+                ];
+        } else {
+            return Redirect::back()->with('success', 'Lo sentimos no tenemos stock');
+        }
     }
 
     /**
@@ -119,7 +159,7 @@ class carritoController extends Controller
      */
     public function update(Request $request, lista_producto $lista_producto)
     {
-        //
+
     }
 
     /**
@@ -130,8 +170,35 @@ class carritoController extends Controller
      */
     public function destroy($id)
     {
+
         $lista_producto = lista_producto::all()->where('id','=',$id)->first();
+
         $lista_producto->delete();
         return Redirect::back()->with('success','Producto eliminado del carrito');
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     */
+
+    public function cantidProducto(Request $request)
+    {
+        $lista = lista_producto::all()->where('id_producto','=',$request->id)->first();
+        $cantidad = $lista->cantidad;
+
+        $lista->updateOrFail([
+            'cantidad'=>$request->quantitat
+        ]);
+        return Redirect::back()->with('success', 'Elemento agregado al carrito');
+
+    }
+
+
+
+
+
 }
+

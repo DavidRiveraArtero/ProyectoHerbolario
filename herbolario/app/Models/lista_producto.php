@@ -13,6 +13,7 @@ class lista_producto extends Model
         'id_usuario',
         'id_producto',
         'id_comanda',
-        'finalizado'
+        'finalizado',
+        'cantidad'
     ];
 }

@@ -73,32 +73,36 @@ class ProductoController extends Controller
         $cometario = comentario::all()->where('id_producto','=',$id);
 
 
+        if($producto->estado == 1){
+            if(Auth::user()) {
+                $loCompro = lista_producto::all()->where('id_usuario','=',Auth::user()->id);
+                $loCompro = $loCompro->where('id_producto','=',$id);
+                $loCompro = $loCompro->where('id_comanda','<>',"");
 
-        if(Auth::user()) {
-            $loCompro = lista_producto::all()->where('id_usuario','=',Auth::user()->id);
-            $loCompro = $loCompro->where('id_producto','=',$id);
-            $loCompro = $loCompro->where('id_comanda','<>',"");
+                $fotoUser = Avatar_usuarios::all()->where('id_usuario','=',Auth::user()->id);
 
-            $fotoUser = Avatar_usuarios::all()->where('id_usuario','=',Auth::user()->id);
-
-            return view("home.show", [
-                "producto" => $producto,
-                "fotoProducto" => $fotoProducto,
-                "FotoUsuario" => $fotoUser,
-                "comentarios" => $cometario,
-                'usuarios'=> User::all(),
-                'loCompro'=>$loCompro
+                return view("home.show", [
+                    "producto" => $producto,
+                    "fotoProducto" => $fotoProducto,
+                    "FotoUsuario" => $fotoUser,
+                    "comentarios" => $cometario,
+                    'usuarios'=> User::all(),
+                    'loCompro'=>$loCompro
 
 
-            ]);
+                ]);
+            }else{
+                return view("home.show", [
+                    "producto" => $producto,
+                    "fotoProducto" => $fotoProducto,
+                    "comentarios" => $cometario,
+                    'usuarios'=> User::all()
+                ]);
+            }
         }else{
-            return view("home.show", [
-                "producto" => $producto,
-                "fotoProducto" => $fotoProducto,
-                "comentarios" => $cometario,
-                'usuarios'=> User::all()
-            ]);
+            dd("Lo sentimos no tenemos este producto");
         }
+
     }
 
     /**
