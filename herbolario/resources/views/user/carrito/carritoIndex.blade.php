@@ -38,7 +38,7 @@
                             @php($rep = $product->nombre)
                             <div class="col-lg-12 col-12" style="margin-bottom: 45px; background-color: white; padding-left: 0;height: 230px; float: left" id="carritoCont">
 
-                                <img class="col-lg-5 col-6" src="{{asset('storage/'.$fotoProducto[$key]->file_path)}}" style="float: left;height: 100%">
+                                <img class="col-lg-5 col-5" src="{{asset('storage/'.$fotoProducto[$key]->file_path)}}" style="float: left;height: 100%">
 
                                 <p class="col-lg-6 col-5" style="float: left; margin-top: 15px; font-size: 20px; margin-left: 30px">{{$product->nombre}}</p>
 
