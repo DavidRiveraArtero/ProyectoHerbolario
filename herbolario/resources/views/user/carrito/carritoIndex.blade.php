@@ -137,6 +137,8 @@
 
         precioF = document.getElementById('precioF')
 
+
+
         precioO = document.getElementsByClassName('precioO')
 
         cantidad = document.getElementsByClassName('cantidad')
@@ -184,6 +186,7 @@
 
         function more(id){
            producto = id.value
+            console.log(precioF)
 
         }
 
@@ -198,9 +201,11 @@
 
             up[x].addEventListener('click',event=>{
                 idproducto = producto
-
+                console.log("ID PRODUCTO",idproducto)
                 valor = event.target.parentNode.getElementsByClassName(idproducto)[0].value
-                precio = event.target.parentNode.getElementsByClassName("precio_"+idproducto)[0].innerHTML
+                precio = event.target.parentNode.parentNode.getElementsByClassName("precio_"+idproducto)[0].innerHTML
+                console.log("PARENT NODE",event.target.parentNode)
+
                 inputV = event.target.parentNode.getElementsByClassName(idproducto)[0]
 
                 console.log("precio UP: ", precio)
@@ -218,7 +223,7 @@
                 idproducto = producto
 
                 valor = event.target.parentNode.getElementsByClassName(idproducto)[0].value
-                precio = event.target.parentNode.getElementsByClassName("precio_"+idproducto)[0].innerHTML
+                precio = event.target.parentNode.parentNode.getElementsByClassName("precio_"+idproducto)[0].innerHTML
                 inputV = event.target.parentNode.getElementsByClassName(idproducto)[0]
                 console.log("precio DOWN: ", precio)
                 console.log("Valor DOWN: ", valor)
@@ -234,7 +239,7 @@
         for(x = 0; x<input.length;x++){
             input[x].addEventListener('change',event=>{
                 idproducto = event.target.parentNode.getElementsByClassName("up")[0].value
-                precio = event.target.parentNode.getElementsByClassName("precio_"+idproducto)[0].innerHTML
+                precio = event.target.parentNode.parentNode.getElementsByClassName("precio_"+idproducto)[0].innerHTML
                 valor = event.target.parentNode.getElementsByClassName(idproducto)[0].value
 
                 console.log("input:" ,valor)
