@@ -36,13 +36,13 @@
 
                         @if($product->nombre != $rep)
                             @php($rep = $product->nombre)
-                            <div class="col-lg-12 col-12" style="margin-bottom: 45px; background-color: white; padding-left: 0;height: 230px; float: left">
+                            <div class="col-lg-12 col-12" style="margin-bottom: 45px; background-color: white; padding-left: 0;height: 230px; float: left" id="carritoCont">
 
                                 <img class="col-lg-5 col-6" src="{{asset('storage/'.$fotoProducto[$key]->file_path)}}" style="float: left;height: 100%">
 
                                 <p class="col-lg-6 col-5" style="float: left; margin-top: 15px; font-size: 20px; margin-left: 30px">{{$product->nombre}}</p>
 
-                                <p  class="col-lg-6 col-5" style="float: left;font-size: 28px; margin-left: 30px;margin-bottom: 10px;"><span class="precio_{{$product->id}} precioO">{{$product->precio * 1.21}}</span>€ <span style="font-size:0.7em">(amb IVA)</span></p>
+                                <p  class="col-lg-6 col-5" style="float: left;font-size: 28px; margin-left: 30px;margin-bottom: 10px;"><span class="precio_{{$product->id}} precioO">{{$product->precio * 1.21}}</span>€ <span style="font-size:0.4em">(amb IVA)</span></p>
 
                                 @if($product->cantidad > 0)
                                     <p class="col-lg-6 col-5" style="float: left;margin-left: 30px; margin-bottom: 7px; color: #00a600">En stock</p>
@@ -57,7 +57,7 @@
 
                                     @foreach($listaP as $lista)
                                         @if($lista->id_producto == $product->id)
-                                            <input class="col-lg-2 {{$product->id}} cantidad" style="margin-bottom: 15px"  type="text" value="{{$lista->cantidad}}" id="">
+                                            <input class="col-lg-2 col-1 {{$product->id}} cantidad" style="margin-bottom: 15px"  type="text" value="{{$lista->cantidad}}" id="">
                                         @endif
                                     @endforeach
 
