@@ -42,28 +42,29 @@
 
                                 <p class="col-lg-6 col-5" style="float: left; margin-top: 15px; font-size: 20px; margin-left: 30px">{{$product->nombre}}</p>
 
-                                <p  class="col-lg-6 col-5" style="float: left;font-size: 28px; margin-left: 30px"><span class="precio_{{$product->id}} precioO">{{$product->precio * 1.21}}</span>€ <span style="font-size:0.7em">(amb IVA)</span></p>
+                                <p  class="col-lg-6 col-5" style="float: left;font-size: 28px; margin-left: 30px;margin-bottom: 10px;"><span class="precio_{{$product->id}} precioO">{{$product->precio * 1.21}}</span>€ <span style="font-size:0.7em">(amb IVA)</span></p>
 
                                 @if($product->cantidad > 0)
-                                    <p class="col-lg-6 col-5" style="float: left;margin-left: 30px; color: #00a600">En stock</p>
+                                    <p class="col-lg-6 col-5" style="float: left;margin-left: 30px; margin-bottom: 7px; color: #00a600">En stock</p>
                                 @else
-                                    <p class="col-lg-6 col-5" style="float: left;margin-left: 30px; color: #e31313">Sin stock</p>
+                                    <p class="col-lg-6 col-5" style="float: left;margin-left: 30px; margin-bottom: 7px; color: #e31313">Sin stock</p>
 
                                 @endif
-                                <label style="float: left;margin-left: 30px;">Cantidad: </label>
+                                <div>
+                                    <label style="float: left;margin-left: 30px;">Cantidad: </label>
 
 
 
-                                @foreach($listaP as $lista)
-                                    @if($lista->id_producto == $product->id)
-                                        <input class="col-lg-2 {{$product->id}} cantidad" style="margin-bottom: 15px"  type="text" value="{{$lista->cantidad}}" id="">
-                                    @endif
-                                @endforeach
+                                    @foreach($listaP as $lista)
+                                        @if($lista->id_producto == $product->id)
+                                            <input class="col-lg-2 {{$product->id}} cantidad" style="margin-bottom: 15px"  type="text" value="{{$lista->cantidad}}" id="">
+                                        @endif
+                                    @endforeach
 
 
-                                <button value="{{$product->id }}" onclick="more(this)" class="up"> + </button>
-                                <button value="{{$product->id }}" class="down" onclick="less(this)"> - </button>
-
+                                    <button value="{{$product->id }}" onclick="more(this)" class="up"> + </button>
+                                    <button value="{{$product->id }}" class="down" onclick="less(this)"> - </button>
+                                </div>
                                 @php($cont++)
 
                                 @foreach($listaP as $lista)

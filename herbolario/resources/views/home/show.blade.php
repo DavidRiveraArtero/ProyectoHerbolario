@@ -64,7 +64,7 @@
         <div class="row">
             @php($cont = 0)
             @foreach ($fotoProducto as $key => $foto)
-                <div class="col-lg-2 col-4 " style="float: left; margin-top: 20px">
+                <div class="col-lg-2 col-4 " style="float: left; margin-top: 20px; height: 150px">
                     <img type="button" data-bs-target="#demo" data-bs-slide-to="{{ $cont }}" src="{{asset("storage/".$foto->file_path)}}" alt="Chicago" class="d-block w-100" style="height: 100%; opacity: 1!important;">
                     @php($cont++)
                 </div>
