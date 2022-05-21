@@ -15,7 +15,7 @@
 
     <div class="container">
         <div class="row">
-            <a href="{{route('direccion.create')}}" class="col-lg-3 container-direccion_plus">
+            <a href="{{route('direccion.create')}}" class="col-lg-3 container-direccion_plus" style="margin-bottom: 13px">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-plus" style="margin-top: 30%" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                 </svg>
@@ -23,7 +23,7 @@
 
             @foreach($direcciones as $direccion)
                 <div class="col-lg-1"></div>
-                <div class="col-lg-3 container-direccion_plus">
+                <div class="col-lg-3 container-direccion_plus" style="margin-bottom: 13px">
                     <p id="direccion_p_con_negrita">{{$direccion->nombre}}</p>
 
                     <p id="direccion_p_sin_negrita">{{$direccion->linea_direccion}}</p>
