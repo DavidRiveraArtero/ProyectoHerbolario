@@ -102,17 +102,6 @@ class carritoController extends Controller
             }
 
 
-            if(count($listaProduct) == 0){
-                dd("adios");
-                $ok = lista_producto::create([
-                    'id_usuario'=>Auth::user()->id,
-                    'id_producto'=>$request->id,
-                    'finalizado'=>false,
-                    'cantidad'=> 1
-                ]);
-            }
-
-
 
             return Redirect::back()->with('success', 'Elemento agregado al carrito');
 
