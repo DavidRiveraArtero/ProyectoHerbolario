@@ -103,6 +103,9 @@ class comandaController extends Controller
                 echo $ex->getData();
             }
 
+        }else{
+            return Redirect::back()->with('success','Lo sentimos no tienes ningun producto para comprar');
+
         }
     }
 
