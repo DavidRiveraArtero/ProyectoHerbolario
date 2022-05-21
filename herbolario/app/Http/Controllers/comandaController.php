@@ -59,7 +59,14 @@ class comandaController extends Controller
                 if ($stock->cantidad <= 0){
                     return Redirect::back()->with('success','Lo sentimos pero uno de nuestros productos no tiene stock no podemos seguir con la compra');
                 }
+                foreach ($listaP as $lista) {
+                    if($lista->cantidad > $stock->cantidad){
+                        return Redirect::back()->with('success','Lo sentimos pero has seleccionado más productos de los que tenemos en stock');
+                    }
+                }
             }
+
+
             comanda::create([
                 'id_direccion'=>$request->id_direccion,
                 'id_usuario' => Auth::user()->id,
@@ -126,7 +133,7 @@ class comandaController extends Controller
                 $producto = Producto::all()->where('id', '=', $lista->id_producto)->first();
                 $precio += ($producto->precio * $lista->cantidad)  * 1.21;
                 $producto->updateOrFail([
-                   'cantidad'=>$producto->cantidad - 1
+                   'cantidad'=>$producto->cantidad - $lista->cantidad
                 ]);
             }
 

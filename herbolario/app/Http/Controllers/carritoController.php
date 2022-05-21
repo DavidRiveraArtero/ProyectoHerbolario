@@ -41,7 +41,6 @@ class carritoController extends Controller
 
 
 
-
         return view('user.carrito.carritoIndex',[
             'listaP' => $listaP,
             'FotoUsuario'=>$avatar,
@@ -74,12 +73,13 @@ class carritoController extends Controller
 
         $listaProduct = lista_producto::all()->where('id_producto','=',$request->id);
 
+        $estado = false;
         if($store->cantidad != 0){
 
 
             foreach ($listaProduct as $lista) {
 
-                if ($lista->id_producto == $request->id) {
+                if ($lista->id_producto == $request->id && $lista->finalizado == 0) {
 
                     $cantidad = $lista->cantidad + 1;
 
@@ -88,20 +88,22 @@ class carritoController extends Controller
                         'cantidad' => $cantidad
 
                     ]);
-                    return Redirect::back()->with('success', 'Elemento agregado al carrito');
-                } else {
-                    $ok = lista_producto::create([
-                        'id_usuario' => Auth::user()->id,
-                        'id_producto' => $request->id,
-                        'finalizado' => false,
-                        'cantidad' => 1
-                    ]);
-
+                    $estado = true;
                 }
+
+            }
+            if($estado == false){
+                $ok = lista_producto::create([
+                    'id_usuario' => Auth::user()->id,
+                    'id_producto' => $request->id,
+                    'finalizado' => false,
+                    'cantidad' => 1
+                ]);
             }
 
 
             if(count($listaProduct) == 0){
+                dd("adios");
                 $ok = lista_producto::create([
                     'id_usuario'=>Auth::user()->id,
                     'id_producto'=>$request->id,
@@ -186,12 +188,20 @@ class carritoController extends Controller
 
     public function cantidProducto(Request $request)
     {
-        $lista = lista_producto::all()->where('id_producto','=',$request->id)->first();
-        $cantidad = $lista->cantidad;
+        $lista = lista_producto::all()->where('id_producto','=',$request->id);
+        $listaU = $lista->where('id_usuario','=', Auth::user()->id);
 
-        $lista->updateOrFail([
-            'cantidad'=>$request->quantitat
-        ]);
+
+
+        foreach ($listaU as $listaF){
+            if($listaF->finalizado == 0){
+                $listaF->updateOrFail([
+                    'cantidad'=>$request->quantitat
+                ]);
+            }
+        }
+
+
         return Redirect::back()->with('success', 'Elemento agregado al carrito');
 
     }

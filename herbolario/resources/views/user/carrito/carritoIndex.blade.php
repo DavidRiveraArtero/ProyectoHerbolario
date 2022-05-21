@@ -54,9 +54,11 @@
 
 
 
-
-                                <input class="col-lg-2 {{$product->id}} cantidad" style="margin-bottom: 15px"  type="text" value="{{$listaP[$cont]->cantidad}}" id="">
-
+                                @foreach($listaP as $lista)
+                                    @if($lista->id_producto == $product->id)
+                                        <input class="col-lg-2 {{$product->id}} cantidad" style="margin-bottom: 15px"  type="text" value="{{$lista->cantidad}}" id="">
+                                    @endif
+                                @endforeach
 
 
                                 <button value="{{$product->id }}" onclick="more(this)" class="up"> + </button>

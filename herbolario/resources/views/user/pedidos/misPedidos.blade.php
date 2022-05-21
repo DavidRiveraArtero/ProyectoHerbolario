@@ -40,8 +40,9 @@
                                     <img src="{{asset("storage/".$foto_producto[$cont]->file_path)}}">
                                 </div>
                                 <div style="float: left">
-                                    <h3 style=" margin-left: 20px;margin-bottom: 45px">{{$productos[$cont]->nombre}}</h3>
-                                    <h3 style=" margin-left: 20px;margin-bottom: 45px">Precio: {{$productos[$cont]->precio}}$</h3>
+                                    <h3 style=" margin-left: 20px;margin-bottom: 20px">{{$productos[$cont]->nombre}}</h3>
+                                    <h3 style=" margin-left: 20px;margin-bottom: 20px">Precio: {{$productos[$cont]->precio}}$</h3>
+                                    <h4 style=" margin-left: 20px;margin-bottom: 20px">Cantidad: {{$lista->cantidad}}</h4>
                                     <a href="{{route('home.show',$productos[$cont])}}" class="btn btn-success" style="margin-left: 20px">Deje su Opinion del producto</a>
 
                                 </div>
